@@ -2,6 +2,10 @@
 
 [ext_resource type="TileSet" uid="uid://b2og34oixrxew" path="res://tile_sets/villa.tres" id="1_i74mr"]
 [ext_resource type="PackedScene" uid="uid://dj0bu7h0jfvsd" path="res://scenes/personaje/personaje.tscn" id="2_m0yor"]
+[ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_m0yor"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yr8e7"]
+size = Vector2(32, 560)
 
 [node name="Villa" type="Node2D" unique_id=1040231890]
 
@@ -30,7 +34,7 @@ tile_map_data = PackedByteArray("AAACAP3/BAAGAAQAAAADAP3/BAAHAAQAAAA=")
 tile_set = ExtResource("1_i74mr")
 
 [node name="Personaje" parent="." unique_id=1322310513 instance=ExtResource("2_m0yor")]
-position = Vector2(8, 40)
+position = Vector2(0, -82)
 
 [node name="Camera2D" type="Camera2D" parent="Personaje" unique_id=923837068]
 zoom = Vector2(3, 3)
@@ -38,3 +42,19 @@ limit_left = -320
 limit_top = -256
 limit_right = 336
 limit_bottom = 272
+
+[node name="PuntosEntrada" type="Node2D" parent="." unique_id=207405093]
+
+[node name="DesdeBosque" type="Node2D" parent="PuntosEntrada" unique_id=1336821327]
+position = Vector2(-307, -98)
+
+[node name="ZonasTransicion" type="Node2D" parent="." unique_id=684667036]
+
+[node name="ZonaBosque" type="Area2D" parent="ZonasTransicion" unique_id=1890339062]
+position = Vector2(-312, 40)
+script = ExtResource("3_m0yor")
+escena_destino = "res://scenes/bosque/bosque.tscn"
+punto_entrada = &"PuntosEntrada/DesdeVilla"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaBosque" unique_id=78614557]
+shape = SubResource("RectangleShape2D_yr8e7")
