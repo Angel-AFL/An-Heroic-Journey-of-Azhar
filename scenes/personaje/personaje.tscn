@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dj0bu7h0jfvsd"]
+
+[ext_resource type="SpriteFrames" uid="uid://j51fuvx5bs4g" path="res://scenes/personaje/sprite_frames_personaje.tres" id="1_vycqi"]
+[ext_resource type="Script" uid="uid://8j6napehbchn" path="res://scenes/personaje/personaje.gd" id="1_yq61j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jv1ba"]
+size = Vector2(15, 15)
+
+[node name="Personaje" type="CharacterBody2D" unique_id=1322310513]
+script = ExtResource("1_yq61j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1181692905]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_jv1ba")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218096813]
+sprite_frames = ExtResource("1_vycqi")
+animation = &"caminar-derecha"
