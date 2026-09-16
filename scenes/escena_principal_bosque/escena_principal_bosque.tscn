@@ -4,7 +4,4 @@
 
 [node name="EscenaPrincipalBosque" type="Node2D" unique_id=666197295]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=995810438]
-zoom = Vector2(2.465, 2.465)
-
 [node name="Bosque" parent="." unique_id=1238125456 instance=ExtResource("1_8wsyv")]
