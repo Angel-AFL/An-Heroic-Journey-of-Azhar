@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://scenes/nieve/nieve_tinte.gdshader" id="1_shader"]
+
+[resource]
+shader = ExtResource("1_shader")
+shader_parameter/nieve_color = Color(0.93, 0.96, 1, 1)
+shader_parameter/intensidad = 0.88
