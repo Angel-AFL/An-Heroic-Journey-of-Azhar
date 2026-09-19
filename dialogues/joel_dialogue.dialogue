@@ -1,11 +1,16 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => start
-- End the conversation => END
-Nathan: For more information see the online documentation.
-=> END
+Joel: ¡Vaya, un viajero por la villa! No te había visto antes.
+Joel: Me llamo Joel, comercio con lo que traigo de mis viajes.
+Joel: ¿En qué puedo ayudarte?
+
+- Quiero ver tus mercancías.
+	Joel: Claro, echa un vistazo a mi arcón.
+	Joel: Tengo pociones, pergaminos y alguna que otra reliquia.
+	=> start
+- ¿Qué se sabe del mundo exterior?
+	Joel: Se cuentan muchas historias, pocas son ciertas.
+	Joel: Dicen que al norte los caminos están plagados de bandidos.
+	=> start
+- Solo pasaba por aquí.
+	Joel: Muy bien. ¡Que la suerte te acompañe, forastero!
+	=> END

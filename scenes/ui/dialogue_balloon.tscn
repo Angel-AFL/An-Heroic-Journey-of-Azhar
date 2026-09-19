@@ -1,0 +1,172 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://ce3lbwomw462d" path="res://scripts/dialogue_balloon.gd" id="1_balloon"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/nodes/dialogue_label/dialogue_label.tscn" id="2_dlabel"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="3_responses"]
+[ext_resource type="Texture2D" uid="uid://doqb0eis44vno" path="res://sprites/UI/Dialog/DialogueBoxSimple.png" id="4_box"]
+[ext_resource type="Texture2D" uid="uid://dndgehqi7iljk" path="res://sprites/UI/Dialog/FacesetBox.png" id="5_facebox"]
+[ext_resource type="Texture2D" uid="uid://c6d714lpaqsya" path="res://sprites/Personajes/NPC/Comerciante/Faceset.png" id="6_faceset"]
+[ext_resource type="Texture2D" uid="uid://c8xfo1oragriq" path="res://sprites/UI/Dialog/ChoiceBox.png" id="7_choice"]
+[ext_resource type="Texture2D" uid="uid://c4xm2mkccxsbi" path="res://sprites/UI/Dialog/Arrow.png" id="8_arrow"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_box"]
+texture = ExtResource("4_box")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_facebox"]
+texture = ExtResource("5_facebox")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice"]
+texture = ExtResource("7_choice")
+texture_margin_left = 6.0
+texture_margin_top = 4.0
+texture_margin_right = 6.0
+texture_margin_bottom = 4.0
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_focus"]
+texture = ExtResource("7_choice")
+modulate_color = Color(1, 0.95, 0.6, 1)
+texture_margin_left = 6.0
+texture_margin_top = 4.0
+texture_margin_right = 6.0
+texture_margin_bottom = 4.0
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_choices"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 16
+Button/styles/focus = SubResource("StyleBoxTexture_choice_focus")
+Button/styles/hover = SubResource("StyleBoxTexture_choice_focus")
+Button/styles/normal = SubResource("StyleBoxTexture_choice")
+Button/styles/pressed = SubResource("StyleBoxTexture_choice_focus")
+
+[node name="DialogueBalloon" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_balloon")
+
+[node name="Balloon" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Root" type="VBoxContainer" parent="Balloon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Margin" type="MarginContainer" parent="Balloon/Root"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="Box" type="PanelContainer" parent="Balloon/Root/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_box")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/Root/Margin/Box"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="FacesetFrame" type="PanelContainer" parent="Balloon/Root/Margin/Box/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_facebox")
+
+[node name="CenterContainer" type="CenterContainer" parent="Balloon/Root/Margin/Box/HBoxContainer/FacesetFrame"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Faceset" type="TextureRect" parent="Balloon/Root/Margin/Box/HBoxContainer/FacesetFrame/CenterContainer"]
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_faceset")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Root/Margin/Box/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="CharacterLabel" type="Label" parent="Balloon/Root/Margin/Box/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Joel"
+
+[node name="DialogueLabel" parent="Balloon/Root/Margin/Box/HBoxContainer/VBoxContainer" instance=ExtResource("2_dlabel")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "..."
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/Root/Margin/Box/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_choices")
+theme_override_constants/separation = 6
+mouse_filter = 2
+script = ExtResource("3_responses")
+response_template = NodePath("ResponseExample")
+
+[node name="ResponseExample" type="Button" parent="Balloon/Root/Margin/Box/HBoxContainer/VBoxContainer/ResponsesMenu"]
+layout_mode = 2
+text = "Opción"
+
+[node name="Progress" type="TextureRect" parent="Balloon/Root/Margin/Box/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+texture = ExtResource("8_arrow")
+stretch_mode = 5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="response_selected" from="Balloon/Root/Margin/Box/HBoxContainer/VBoxContainer/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ds6eetn3k20oi"]
 
 [ext_resource type="Texture2D" uid="uid://c5v81mfokreef" path="res://sprites/Personajes/NPC/Comerciante/SeparateAnim/Idle.png" id="1_o42ik"]
+[ext_resource type="Script" uid="uid://vij7kxck0cst" path="res://scripts/npc_dialogo.gd" id="2_npcscript"]
+[ext_resource type="Resource" uid="uid://bjtigpht7e2qn" path="res://dialogues/joel_dialogue.dialogue" id="3_dialogo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ieep"]
 size = Vector2(14, 14)
@@ -20,7 +22,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_interaccion"]
+radius = 11.0
+
 [node name="Joel" type="CharacterBody2D" unique_id=62038762]
+script = ExtResource("2_npcscript")
+dialogo = ExtResource("3_dialogo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1678660858]
 position = Vector2(0, 1)
@@ -30,3 +37,8 @@ shape = SubResource("RectangleShape2D_5ieep")
 sprite_frames = SubResource("SpriteFrames_jv1ba")
 animation = &"new_animation"
 frame_progress = 0.75622225
+
+[node name="ZonaInteraccion" type="Area2D" parent="." unique_id=901248796]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion" unique_id=1522840110]
+shape = SubResource("CircleShape2D_interaccion")
