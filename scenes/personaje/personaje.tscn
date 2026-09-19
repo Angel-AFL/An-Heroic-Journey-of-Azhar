@@ -16,3 +16,6 @@ shape = SubResource("RectangleShape2D_jv1ba")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218096813]
 sprite_frames = ExtResource("1_vycqi")
 animation = &"caminar-derecha"
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1967947531]
+one_shot = true

@@ -1,10 +1,27 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://j51fuvx5bs4g"]
 
+[ext_resource type="Texture2D" uid="uid://djxtnudmbpryv" path="res://sprites/Personajes/GreenNinja/Attack.png" id="1_34vdl"]
 [ext_resource type="Texture2D" uid="uid://cicnux4bujoe3" path="res://sprites/Personajes/GreenNinja/GreenNinja_Caminar_Abajo.png" id="1_nt06w"]
 [ext_resource type="Texture2D" uid="uid://bktu1bbkbin21" path="res://sprites/Personajes/GreenNinja/GreenNinja_Caminar_Arriba.png" id="2_34vdl"]
 [ext_resource type="Texture2D" uid="uid://dn7pw6ioypl0d" path="res://sprites/Personajes/GreenNinja/GreenNinja_Caminar_Derecha.png" id="3_f27s7"]
 [ext_resource type="Texture2D" uid="uid://bnqmco20kfoif" path="res://sprites/Personajes/GreenNinja/GreenNinja_Caminar_IZquierda.png" id="4_gc0me"]
 [ext_resource type="Texture2D" uid="uid://tn0185u8khke" path="res://sprites/Personajes/GreenNinja/Idle.png" id="5_vka6j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f27s7"]
+atlas = ExtResource("1_34vdl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34vdl"]
+atlas = ExtResource("1_34vdl")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc0me"]
+atlas = ExtResource("1_34vdl")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vka6j"]
+atlas = ExtResource("1_34vdl")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mil4b"]
 atlas = ExtResource("1_nt06w")
@@ -74,8 +91,52 @@ region = Rect2(48, 0, 16, 16)
 atlas = ExtResource("5_vka6j")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cj57"]
+atlas = ExtResource("5_vka6j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbrtb"]
+atlas = ExtResource("5_vka6j")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kjwt"]
+atlas = ExtResource("5_vka6j")
+region = Rect2(32, 0, 16, 16)
+
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f27s7")
+}],
+"loop": 1,
+"name": &"atacar-abajo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34vdl")
+}],
+"loop": 1,
+"name": &"atacar-arriba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gc0me")
+}],
+"loop": 1,
+"name": &"atacar-derecha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vka6j")
+}],
+"loop": 1,
+"name": &"atacar-izquierda",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mil4b")
@@ -149,6 +210,30 @@ animations = [{
 "texture": SubResource("AtlasTexture_ohtka")
 }],
 "loop": 1,
-"name": &"idle",
+"name": &"idle-abajo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cj57")
+}],
+"loop": 1,
+"name": &"idle-arriba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbrtb")
+}],
+"loop": 1,
+"name": &"idle-derecha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kjwt")
+}],
+"loop": 1,
+"name": &"idle-izquierda",
 "speed": 5.0
 }]
