@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ds6eetn3k20oi"]
+
+[ext_resource type="Texture2D" uid="uid://c5v81mfokreef" path="res://sprites/Personajes/NPC/Comerciante/SeparateAnim/Idle.png" id="1_o42ik"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ieep"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8oo1"]
+atlas = ExtResource("1_o42ik")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jv1ba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8oo1")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Joel" type="CharacterBody2D" unique_id=62038762]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1678660858]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_5ieep")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=140605558]
+sprite_frames = SubResource("SpriteFrames_jv1ba")
+animation = &"new_animation"
+frame_progress = 0.75622225

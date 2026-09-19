@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://b2og34oixrxew" path="res://tile_sets/villa.tres" id="1_i74mr"]
 [ext_resource type="PackedScene" uid="uid://dj0bu7h0jfvsd" path="res://scenes/personaje/personaje.tscn" id="2_m0yor"]
 [ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_m0yor"]
+[ext_resource type="PackedScene" uid="uid://ds6eetn3k20oi" path="res://scenes/npcs/joel_npc.tscn" id="4_yr8e7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr8e7"]
 size = Vector2(32, 560)
@@ -58,3 +59,6 @@ punto_entrada = &"PuntosEntrada/DesdeVilla"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaBosque" unique_id=78614557]
 shape = SubResource("RectangleShape2D_yr8e7")
+
+[node name="Joel" parent="." unique_id=62038762 instance=ExtResource("4_yr8e7")]
+position = Vector2(-151, -104)
