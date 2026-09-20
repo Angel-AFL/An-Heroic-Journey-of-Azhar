@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b5jddddyvuos3"]
 
 [ext_resource type="Texture2D" uid="uid://v54k8u6x65wi" path="res://sprites/Personajes/Enemigos/Enemigo_3.png" id="1_g412j"]
+[ext_resource type="Script" uid="uid://dvol776icrg7r" path="res://scenes/enemigos/enemigo.gd" id="1_xodo8"]
+[ext_resource type="Texture2D" uid="uid://dypcnwa3gqys7" path="res://sprites/Personajes/Enemigos/EnemigoMuerto.png" id="3_kqt5b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ew6px"]
 size = Vector2(16, 15)
@@ -41,7 +43,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_533oq"]
+size = Vector2(18, 14)
+
 [node name="FlamaInvierno" type="CharacterBody2D" unique_id=1333311051]
+collision_layer = 2
+script = ExtResource("1_xodo8")
+vida_maxima = 2
+velocidad = 70.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=390322828]
 position = Vector2(0, 0.5)
@@ -49,3 +58,20 @@ shape = SubResource("RectangleShape2D_ew6px")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1176119121]
 sprite_frames = SubResource("SpriteFrames_5ieep")
+autoplay = "default"
+
+[node name="ZonaContacto" type="Area2D" parent="." unique_id=1096463101]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaContacto" unique_id=2114877336]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_533oq")
+
+[node name="SpriteMuerte" type="Sprite2D" parent="." unique_id=1142768343]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_kqt5b")
+
+[node name="TimerDano" type="Timer" parent="." unique_id=833530588]
+one_shot = true

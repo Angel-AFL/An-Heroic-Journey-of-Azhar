@@ -39,6 +39,24 @@ verify changes by running the game through the `godot_ai` MCP addon.
 - Dialogue: `scripts/npc_dialogo.gd` calls `DialogueManager.show_dialogue_balloon(resource, cue)`;
   dialogue sources are `.dialogue` files under `dialogues/`.
 
+## Enemies / combat
+
+- Generic enemy behavior lives in `scenes/enemigos/enemigo.gd` (a `CharacterBody2D`):
+  pursues the `Personaje` within `radio_deteccion`, deals `dano_contacto` on touch, takes
+  damage via `recibir_dano`, and `morir()` frees the node after a fade. Tune per enemy with
+  `@export` (`vida_maxima`, `velocidad`, `radio_deteccion`, `dano_contacto`, `cadencia_dano`,
+  `empuje`).
+- Enemy scenes: `slime.tscn`, `cactus.tscn`, `flama_invierno.tscn`. `slime.gd` only
+  `extends "res://scenes/enemigos/enemigo.gd"`; new enemies attach `enemigo.gd` directly.
+  Every enemy scene needs the child nodes the script `@onready`s: `AnimatedSprite2D` (set
+  `autoplay`), `CollisionShape2D`, `ZonaContacto` (Area2D + `CollisionShape2D`),
+  `SpriteMuerte` (Sprite2D, `visible = false`) and `TimerDano` (Timer, `one_shot = true`).
+- Collision layers: enemies are on `collision_layer = 2` so the player's `Hitbox`
+  (`collision_mask = 2`) can hit them; their `ZonaContacto` (mask 1) detects the player.
+- Levels place enemies under a `Enemigos` Node2D and instance `res://scenes/ui/hud.tscn`
+  (heart HUD via `scripts/hud_corazones.gd`, driven by the `Personaje.vida_cambiada` signal).
+  The player exposes `recibir_dano`/`vida_maxima` and reloads the scene on death.
+
 ## Player animation
 
 - `Personaje` uses an `AnimatedSprite2D` with `scenes/personaje/sprite_frames_personaje.tres`;

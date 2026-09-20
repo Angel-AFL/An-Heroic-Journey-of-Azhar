@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://j03eichafyiy"]
 
+[ext_resource type="Script" uid="uid://dvol776icrg7r" path="res://scenes/enemigos/enemigo.gd" id="1_7vdxa"]
 [ext_resource type="Texture2D" uid="uid://dctqta27gwc1f" path="res://sprites/Personajes/Enemigos/Enemigo_1.png" id="1_lpkei"]
+[ext_resource type="Texture2D" uid="uid://dypcnwa3gqys7" path="res://sprites/Personajes/Enemigos/EnemigoMuerto.png" id="3_8bm13"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ieep"]
 size = Vector2(14, 15)
@@ -41,7 +43,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q206j"]
+size = Vector2(18, 14)
+
 [node name="Cactus" type="CharacterBody2D" unique_id=1449505607]
+collision_layer = 2
+script = ExtResource("1_7vdxa")
+vida_maxima = 4
+velocidad = 35.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1102778856]
 position = Vector2(0, 0.5)
@@ -49,3 +58,20 @@ shape = SubResource("RectangleShape2D_5ieep")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=538808239]
 sprite_frames = SubResource("SpriteFrames_jv1ba")
+autoplay = "default"
+
+[node name="ZonaContacto" type="Area2D" parent="." unique_id=967620080]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaContacto" unique_id=677094950]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_q206j")
+
+[node name="SpriteMuerte" type="Sprite2D" parent="." unique_id=884866526]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8bm13")
+
+[node name="TimerDano" type="Timer" parent="." unique_id=1370062921]
+one_shot = true
