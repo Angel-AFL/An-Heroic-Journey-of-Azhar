@@ -5,13 +5,13 @@
 [ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_n5mo8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vifm"]
-size = Vector2(32, 640)
+size = Vector2(23, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5mo8"]
-size = Vector2(32, 640)
+size = Vector2(32, 84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nieve"]
-size = Vector2(640, 32)
+size = Vector2(52, 22)
 
 [node name="Bosque" type="Node2D" unique_id=1238125456]
 
@@ -60,6 +60,7 @@ escena_destino = "res://scenes/villa/villa.tscn"
 punto_entrada = &"PuntosEntrada/DesdeBosque"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaVilla" unique_id=764071568]
+position = Vector2(-3, 95)
 shape = SubResource("RectangleShape2D_3vifm")
 
 [node name="ZonaDesierto" type="Area2D" parent="ZonasTransicion" unique_id=1598893824]
@@ -69,6 +70,7 @@ escena_destino = "res://scenes/desierto/desierto.tscn"
 punto_entrada = &"PuntosEntrada/DesdeBosque"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaDesierto" unique_id=1949461016]
+position = Vector2(8, 34)
 shape = SubResource("RectangleShape2D_n5mo8")
 
 [node name="ZonaNieve" type="Area2D" parent="ZonasTransicion" unique_id=1598893825]
@@ -78,5 +80,5 @@ escena_destino = "res://scenes/nieve/nieve.tscn"
 punto_entrada = &"PuntosEntrada/DesdeBosque"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaNieve" unique_id=1949461017]
-position = Vector2(170, 0)
+position = Vector2(168, 27)
 shape = SubResource("RectangleShape2D_nieve")

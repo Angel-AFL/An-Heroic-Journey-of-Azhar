@@ -6,7 +6,7 @@
 [ext_resource type="Material" path="res://scenes/nieve/nieve_tinte.tres" id="4_mat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zona"]
-size = Vector2(640, 32)
+size = Vector2(138, 32)
 
 [node name="Nieve" type="Node2D" unique_id=332412277]
 
@@ -47,4 +47,5 @@ escena_destino = "res://scenes/bosque/bosque.tscn"
 punto_entrada = &"PuntosEntrada/DesdeNieve"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaBosque" unique_id=1387672202]
+position = Vector2(0, -31)
 shape = SubResource("RectangleShape2D_zona")

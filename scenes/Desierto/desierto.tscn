@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_xfecq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0l5s8"]
-size = Vector2(32, 640)
+size = Vector2(24, 59)
 
 [node name="Desierto" type="Node2D" unique_id=1933359492]
 
@@ -49,4 +49,5 @@ escena_destino = "res://scenes/bosque/bosque.tscn"
 punto_entrada = &"PuntosEntrada/DesdeDesierto"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaBosque" unique_id=1279299524]
+position = Vector2(-4, 2)
 shape = SubResource("RectangleShape2D_0l5s8")
