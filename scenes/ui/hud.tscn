@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cqd1b4hy7xunh"]
+
+[ext_resource type="Script" uid="uid://drn2xbeye7fvm" path="res://scripts/hud_corazones.gd" id="1_0mwgc"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1744036134]
+
+[node name="Corazones" type="Control" parent="." unique_id=1690544440]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_0mwgc")

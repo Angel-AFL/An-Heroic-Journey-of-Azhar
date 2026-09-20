@@ -3,6 +3,8 @@
 [ext_resource type="TileSet" uid="uid://c5wybx1kc7qrn" path="res://tile_sets/bosque.tres" id="1_j2be5"]
 [ext_resource type="PackedScene" uid="uid://dj0bu7h0jfvsd" path="res://scenes/personaje/personaje.tscn" id="2_o1l1o"]
 [ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_n5mo8"]
+[ext_resource type="PackedScene" uid="uid://dh2v2wlybytuy" path="res://scenes/enemigos/slime.tscn" id="4_djhx6"]
+[ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_ffbyw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vifm"]
 size = Vector2(23, 72)
@@ -82,3 +84,16 @@ punto_entrada = &"PuntosEntrada/DesdeBosque"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaNieve" unique_id=1949461017]
 position = Vector2(168, 27)
 shape = SubResource("RectangleShape2D_nieve")
+
+[node name="Enemigos" type="Node2D" parent="." unique_id=895907001]
+
+[node name="Slime1" parent="Enemigos" unique_id=283301970 instance=ExtResource("4_djhx6")]
+position = Vector2(150, 0)
+
+[node name="Slime2" parent="Enemigos" unique_id=1724339131 instance=ExtResource("4_djhx6")]
+position = Vector2(-150, 60)
+
+[node name="Slime3" parent="Enemigos" unique_id=1179860975 instance=ExtResource("4_djhx6")]
+position = Vector2(80, -160)
+
+[node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("5_ffbyw")]

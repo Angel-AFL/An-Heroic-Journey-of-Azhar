@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jv1ba"]
 size = Vector2(15, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq61j"]
+size = Vector2(16, 16)
+
 [node name="Personaje" type="CharacterBody2D" unique_id=1322310513 groups=["personaje"]]
 script = ExtResource("1_yq61j")
 
@@ -18,4 +21,16 @@ sprite_frames = ExtResource("1_vycqi")
 animation = &"caminar-derecha"
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1967947531]
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1864085413]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1327139317]
+shape = SubResource("RectangleShape2D_yq61j")
+
+[node name="InvulnerabilidadTimer" type="Timer" parent="." unique_id=1403938747]
+wait_time = 0.8
 one_shot = true
