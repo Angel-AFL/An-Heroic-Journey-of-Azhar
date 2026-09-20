@@ -96,10 +96,10 @@ func _empunar_espada() -> void:
 	_espada.visible = true
 	match _dir_name(direccion):
 		"derecha":
-			_espada.position = Vector2(9, 0)
+			_espada.position = Vector2(9, 4)
 			_espada.rotation = PI / 2.0
 		"izquierda":
-			_espada.position = Vector2(-9, 0)
+			_espada.position = Vector2(-12, 5)
 			_espada.rotation = -PI / 2.0
 		"arriba":
 			_espada.position = Vector2(0, -9)

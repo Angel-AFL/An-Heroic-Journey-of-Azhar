@@ -37,5 +37,6 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Espada" type="Sprite2D" parent="." unique_id=818929696]
-visible = false
+position = Vector2(2.0861626e-07, 0)
+scale = Vector2(0.8, 1)
 texture = ExtResource("3_bvjb6")
