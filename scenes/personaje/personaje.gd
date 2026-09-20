@@ -23,6 +23,7 @@ var _golpeados: Array = []
 @onready var _attack_timer: Timer = $AttackTimer
 @onready var _hitbox: Area2D = $Hitbox
 @onready var _inv_timer: Timer = $InvulnerabilidadTimer
+@onready var _espada: Sprite2D = $Espada
 
 
 func _ready() -> void:
@@ -79,6 +80,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_sprite.play("atacar-" + _dir_name(direccion))
 		_attack_timer.start()
 		_activar_hitbox()
+		_empunar_espada()
 
 
 func _activar_hitbox() -> void:
@@ -88,6 +90,27 @@ func _activar_hitbox() -> void:
 	await get_tree().physics_frame
 	if atacando:
 		_golpear_en_hitbox()
+
+
+func _empunar_espada() -> void:
+	_espada.visible = true
+	match _dir_name(direccion):
+		"derecha":
+			_espada.position = Vector2(9, 0)
+			_espada.rotation = PI / 2.0
+		"izquierda":
+			_espada.position = Vector2(-9, 0)
+			_espada.rotation = -PI / 2.0
+		"arriba":
+			_espada.position = Vector2(0, -9)
+			_espada.rotation = 0.0
+		_:
+			_espada.position = Vector2(0, 9)
+			_espada.rotation = PI
+
+
+func _guardar_espada() -> void:
+	_espada.visible = false
 
 
 func _golpear_en_hitbox() -> void:
@@ -127,6 +150,7 @@ func _morir() -> void:
 	puede_moverse = false
 	atacando = false
 	_hitbox.monitoring = false
+	_guardar_espada()
 	_sprite.modulate.a = 1.0
 	await get_tree().create_timer(0.6).timeout
 	get_tree().reload_current_scene()
@@ -147,6 +171,7 @@ func _on_invulnerabilidad_fin() -> void:
 func _on_attack_finished() -> void:
 	atacando = false
 	_hitbox.monitoring = false
+	_guardar_espada()
 	_play_idle()
 
 
