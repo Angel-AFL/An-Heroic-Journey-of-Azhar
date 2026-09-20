@@ -3,6 +3,8 @@
 [ext_resource type="TileSet" uid="uid://cq1w2e3r4t5y6" path="res://tile_sets/desierto_terreno.tres" id="1_olxwj"]
 [ext_resource type="PackedScene" uid="uid://dj0bu7h0jfvsd" path="res://scenes/personaje/personaje.tscn" id="2_ijhus"]
 [ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_xfecq"]
+[ext_resource type="PackedScene" uid="uid://j03eichafyiy" path="res://scenes/enemigos/cactus.tscn" id="4_mjqie"]
+[ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_5b8jf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0l5s8"]
 size = Vector2(24, 59)
@@ -51,3 +53,25 @@ punto_entrada = &"PuntosEntrada/DesdeDesierto"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonasTransicion/ZonaBosque" unique_id=1279299524]
 position = Vector2(-4, 2)
 shape = SubResource("RectangleShape2D_0l5s8")
+
+[node name="Enemigos" type="Node2D" parent="." unique_id=124721982]
+
+[node name="Cactus1" parent="Enemigos" unique_id=1449505607 instance=ExtResource("4_mjqie")]
+position = Vector2(-360, 140)
+
+[node name="Cactus2" parent="Enemigos" unique_id=820699051 instance=ExtResource("4_mjqie")]
+position = Vector2(-180, -180)
+
+[node name="Cactus3" parent="Enemigos" unique_id=309017891 instance=ExtResource("4_mjqie")]
+position = Vector2(0, 120)
+
+[node name="Cactus4" parent="Enemigos" unique_id=647658972 instance=ExtResource("4_mjqie")]
+position = Vector2(160, -200)
+
+[node name="Cactus5" parent="Enemigos" unique_id=935318169 instance=ExtResource("4_mjqie")]
+position = Vector2(-120, 40)
+
+[node name="Cactus6" parent="Enemigos" unique_id=1037589099 instance=ExtResource("4_mjqie")]
+position = Vector2(-40, -240)
+
+[node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("5_5b8jf")]
