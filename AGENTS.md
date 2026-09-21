@@ -12,8 +12,14 @@ verify changes by running the game through the `godot_ai` MCP addon.
 - There are no unit tests. Verify at runtime with `game_eval` (GDScript in the running
   game), `game_manage` (`get_node_info`, `input_sequence`, `input_action`), and `logs_read`.
 - Simulating input: `_unhandled_input`/`_input` handlers only react to real events
-  (`Input.parse_input_event`), **not** `Input.action_press`. Use `input_sequence` for
-  frame-accurate action input; `is_action_just_pressed` can be missed by ad-hoc eval timing.
+  (`Input.parse_input_event`), **not** `Input.action_press`. `input_sequence`/`input_action`
+  use `Input.action_press`, so they drive `Input.is_action_pressed` in `_process`/`_physics_process`
+  but will **not** trigger `_unhandled_input` handlers (e.g. opening an NPC dialogue with
+  `interactuar`). For those, send a real key with `input_key` (`E` = `interactuar`); use
+  `input_sequence` for movement over time. `is_action_just_pressed` can be missed by ad-hoc
+  eval timing.
+- Verifying an interaction `Area2D`: teleporting the player by setting `global_position` does
+  not reliably emit `body_entered`; walk the player into the zone with `input_sequence` instead.
 - The game window must be focused/advancing for eval; a parser error in eval code parks
   the game in a debugger `break` — stop the project and relaunch to recover.
 
@@ -47,6 +53,10 @@ verify changes by running the game through the `godot_ai` MCP addon.
   `hide_failed_responses = true`, so response options whose `[if ... /]` is false are
   **hidden** instead of shown as disabled/dark buttons. Keep that flag if you don't want
   greyed-out options.
+- The balloon picks the portrait by the dialogue line's character name via the `RETRATOS`
+  map in `scripts/dialogue_balloon.gd` (`"Miguel"` → `Villager/Faceset.png`), falling back to
+  `RETRATO_POR_DEFECTO` (Comerciante). Add an entry there for each new speaking character; the
+  portrait node is `%Faceset` (the `CharacterLabel` text already comes from the character name).
 - Dialogue Manager supports `if`/`else` blocks and responses nested by tab indentation, so a
   response body can branch and offer follow-up options (see `dialogues/joel_dialogue.dialogue`).
 - `scripts/comerciante.gd` (on `scenes/npcs/joel_npc.tscn`) registers the `Comerciante` state
@@ -54,6 +64,21 @@ verify changes by running the game through the `godot_ai` MCP addon.
   by `Mejoras.corazones_extra` and the `Monedero` autoload. `joel_dialogue.dialogue` uses them:
   the single option `¿Puedes hacerme más fuerte?` states the price and offers the purchase as a
   second step when affordable.
+
+## NPCs
+
+- Base behavior lives in `scripts/npc_dialogo.gd` (on a `CharacterBody2D`/`Node2D`): when the
+  player (group `personaje`) is inside `ZonaInteraccion` (an `Area2D` + `CollisionShape2D`,
+  e.g. radius 11) it opens `@export var dialogo` (`DialogueResource`) from `cue_inicio`
+  (default `start`) on `interactuar`. The scene must provide that `ZonaInteraccion` child.
+- `scripts/comerciante.gd` extends it (Joel, `scenes/npcs/joel_npc.tscn`) and registers the
+  `Comerciante` state context (see Dialogue / merchants above).
+- `scripts/guardia.gd` extends it (Miguel, `scenes/npcs/miguel_npc.tscn`): paces vertically
+  between its spawn `position` and `position.y + recorrido` at `velocidad`, playing
+  `caminar_abajo`/`caminar_arriba` from its own `SpriteFrames` (underscore names — unlike the
+  player's hyphenated ones), and stops while a dialogue is active (`_dialogo_activo`).
+  Exports: `velocidad`, `recorrido`.
+- NPCs are placed directly in the level scene (e.g. `Miguel` in `scenes/villa/villa.tscn`).
 
 ## Enemies / combat
 

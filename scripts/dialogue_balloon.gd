@@ -20,8 +20,16 @@ extends CanvasLayer
 ## Acción para saltar el efecto de escritura.
 @export var skip_action: StringName = &"interactuar"
 
+## Retrato mostrado por nombre de personaje. Si el nombre no está en el mapa
+## se usa RETRATO_POR_DEFECTO.
+const RETRATOS := {
+	"Miguel": preload("res://sprites/Personajes/NPC/Villager/Faceset.png"),
+}
+const RETRATO_POR_DEFECTO: Texture2D = preload("res://sprites/Personajes/NPC/Comerciante/Faceset.png")
+
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 @onready var balloon: Control = %Balloon
+@onready var faceset: TextureRect = %Faceset
 @onready var character_label: Label = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
@@ -107,6 +115,7 @@ func apply_dialogue_line() -> void:
 
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
+	faceset.texture = RETRATOS.get(dialogue_line.character, RETRATO_POR_DEFECTO)
 
 	dialogue_label.hide()
 	dialogue_label.dialogue_line = dialogue_line
