@@ -22,6 +22,7 @@ Transicion="*res://scripts/transicion.gd"
 DialogueManager="*uid://c3rodes2l3gxb"
 Monedero="*res://scripts/monedero.gd"
 Mejoras="*res://scripts/mejoras.gd"
+Sonido="*res://scripts/sonido.gd"
 
 [dialogue_manager]
 

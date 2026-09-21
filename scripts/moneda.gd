@@ -4,6 +4,8 @@ extends Area2D
 ## desaparece. El total se conserva entre escenarios (autoload Monedero).
 
 const MonederoTipo = preload("res://scripts/monedero.gd")
+const SonidoTipo = preload("res://scripts/sonido.gd")
+const SONIDO_RECOGIDA: AudioStream = preload("res://audio/moneda.wav")
 
 @export var valor: int = 1
 
@@ -11,6 +13,7 @@ var _recogida: bool = false
 var _bob: Tween
 
 @onready var _monedero: MonederoTipo = get_node("/root/Monedero") as MonederoTipo
+@onready var _sonido: SonidoTipo = get_node("/root/Sonido") as SonidoTipo
 
 
 func _ready() -> void:
@@ -33,6 +36,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	_recogida = true
 	_monedero.agregar(valor)
+	_sonido.reproducir(SONIDO_RECOGIDA)
 	set_deferred("monitoring", false)
 	if _bob != null:
 		_bob.kill()

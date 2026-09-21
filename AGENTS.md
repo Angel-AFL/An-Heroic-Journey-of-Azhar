@@ -36,8 +36,8 @@ verify changes by running the game through the `godot_ai` MCP addon.
 ## Architecture
 
 - Autoloads (`project.godot`): `Transicion` (scene fades), `Monedero` (global coin
-  total), `Mejoras` (permanent upgrades: extra max hearts), `DialogueManager`
-  (dialogue_manager addon), `_mcp_game_helper` (godot_ai addon).
+  total), `Mejoras` (permanent upgrades: extra max hearts), `Sonido` (SFX pool, see Audio
+  below), `DialogueManager` (dialogue_manager addon), `_mcp_game_helper` (godot_ai addon).
 - Every level instances `res://scenes/personaje/personaje.tscn` as a node named exactly
   `Personaje`. `scripts/transicion.gd` repositions the node found by that literal name, and
   `scripts/zona_transicion.gd` triggers on group `personaje` — preserve both when editing levels.
@@ -105,7 +105,8 @@ verify changes by running the game through the `godot_ai` MCP addon.
   `agregar(cantidad)`, `gastar(cantidad)`, `reiniciar()`.
 - `scenes/items/moneda.tscn` (`scripts/moneda.gd`) is a pickup `Area2D` (`Sprite2D` +
   `CollisionShape2D`, `collision_layer = 0`); on `body_entered` from group `personaje` it
-  calls `Monedero.agregar(valor)` and frees itself. The drop is controlled per enemy by
+  calls `Monedero.agregar(valor)`, plays `res://audio/moneda.wav` via `Sonido.reproducir`
+  (see Audio below) and frees itself. The drop is controlled per enemy by
   `monedas_al_morir` and `escena_moneda` in `enemigo.gd` (slime/flama drop 1, cactus 2).
 - Reference the autoload from scripts via `const MonederoTipo = preload("res://scripts/monedero.gd")`
   then `get_node("/root/Monedero") as MonederoTipo`: the editor does not register a
@@ -115,6 +116,20 @@ verify changes by running the game through the `godot_ai` MCP addon.
   desierto, nieve).
 - Because levels reload on transition and only the total persists, enemies respawn and coins
   can be farmed.
+
+## Audio
+
+- `scripts/sonido.gd` is the `Sonido` autoload: a pool of 8 `AudioStreamPlayer` on the `SFX`
+  bus. API: `reproducir(stream, volumen_db = 0.0)` reuses the first idle player. Because it
+  is global, the sound keeps playing after the node that triggered it (e.g. a coin) frees
+  itself — don't add a per-node `AudioStreamPlayer` for one-shot SFX.
+- `default_bus_layout.tres` defines buses `Master` + `SFX` (project setting
+  `audio/buses/default_bus_layout` points there by default). Route new SFX through `SFX` so
+  effect volume stays separate from music.
+- Reference the autoload the same way as `Monedero`: `const SonidoTipo = preload("res://scripts/sonido.gd")`
+  then `get_node("/root/Sonido") as SonidoTipo`.
+- Supported native formats: WAV (`AudioStreamWAV`, short SFX), OGG Vorbis (`AudioStreamOggVorbis`,
+  music/loops), MP3 (`AudioStreamMP3`). No native FLAC/AAC.
 
 ## Player animation
 
