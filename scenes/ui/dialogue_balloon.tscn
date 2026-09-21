@@ -151,6 +151,7 @@ theme_override_constants/separation = 6
 mouse_filter = 2
 script = ExtResource("3_responses")
 response_template = NodePath("ResponseExample")
+hide_failed_responses = true
 
 [node name="ResponseExample" type="Button" parent="Balloon/Root/Margin/Box/HBoxContainer/VBoxContainer/ResponsesMenu"]
 layout_mode = 2
