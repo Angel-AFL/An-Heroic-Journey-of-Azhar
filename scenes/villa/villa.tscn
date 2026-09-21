@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ds6eetn3k20oi" path="res://scenes/npcs/joel_npc.tscn" id="4_yr8e7"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_14xes"]
 [ext_resource type="PackedScene" uid="uid://bsvewru48yice" path="res://scenes/npcs/miguel_npc.tscn" id="6_1n6g3"]
-[ext_resource type="AudioStream" uid="uid://inekaxqatokr" path="res://audio/villa.wav" id="7_hh8rf"]
+[ext_resource type="AudioStream" uid="uid://d37c58p5bavep" path="res://audio/villa-soundtrack.wav" id="7_hh8rf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr8e7"]
 size = Vector2(26, 45)
