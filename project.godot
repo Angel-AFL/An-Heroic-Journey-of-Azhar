@@ -21,6 +21,7 @@ _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 Transicion="*res://scripts/transicion.gd"
 DialogueManager="*uid://c3rodes2l3gxb"
 Monedero="*res://scripts/monedero.gd"
+Mejoras="*res://scripts/mejoras.gd"
 
 [dialogue_manager]
 
