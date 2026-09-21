@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cro0u0mye886y"]
+
+[ext_resource type="Script" uid="uid://ch625bjhrv7db" path="res://scripts/moneda.gd" id="1_5aon6"]
+[ext_resource type="Texture2D" uid="uid://ckapkvo5bqqpr" path="res://sprites/Items/Tesoros/MonedaPlateada.png" id="2_40i8b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gpn3e"]
+radius = 8.0
+
+[node name="Moneda" type="Area2D" unique_id=1959720228]
+collision_layer = 0
+script = ExtResource("1_5aon6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1605823562]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_40i8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=231348210]
+shape = SubResource("CircleShape2D_gpn3e")

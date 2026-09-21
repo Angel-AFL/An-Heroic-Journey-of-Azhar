@@ -12,6 +12,8 @@ signal murio
 @export var dano_contacto: int = 1
 @export var cadencia_dano: float = 1.0
 @export var empuje: float = 110.0
+@export var monedas_al_morir: int = 1
+@export var escena_moneda: PackedScene = preload("res://scenes/items/moneda.tscn")
 
 var vida: int = 0
 var _jugador: Node2D = null
@@ -93,10 +95,23 @@ func _flash() -> void:
 	tween.tween_property(_sprite, "modulate", Color.WHITE, 0.15)
 
 
+func _soltar_monedas() -> void:
+	if escena_moneda == null or monedas_al_morir <= 0:
+		return
+	var escena := get_tree().current_scene
+	if escena == null:
+		return
+	for i in monedas_al_morir:
+		var moneda := escena_moneda.instantiate() as Node2D
+		moneda.position = global_position + Vector2(randf_range(-6.0, 6.0), randf_range(-6.0, 6.0))
+		escena.call_deferred("add_child", moneda)
+
+
 func morir() -> void:
 	if _muerto:
 		return
 	_muerto = true
+	_soltar_monedas()
 	velocity = Vector2.ZERO
 	_sprite.hide()
 	_sprite_muerte.show()

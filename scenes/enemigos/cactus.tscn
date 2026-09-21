@@ -51,6 +51,7 @@ collision_layer = 2
 script = ExtResource("1_7vdxa")
 vida_maxima = 4
 velocidad = 35.0
+monedas_al_morir = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1102778856]
 position = Vector2(0, 0.5)
