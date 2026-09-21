@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bsvewru48yice"]
+
+[ext_resource type="Script" uid="uid://daacif4q4wew0" path="res://scripts/guardia.gd" id="1_42hbi"]
+[ext_resource type="Texture2D" uid="uid://xjjhmcx3d6jv" path="res://sprites/Personajes/NPC/Villager/SeparateAnim/Walk.png" id="1_ugb8p"]
+[ext_resource type="Resource" uid="uid://3cxlj3mr4tfr" path="res://dialogues/miguel_dialogue.dialogue" id="2_b6t5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ieep"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s01qu"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t31i"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4jap"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyms"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue4cr"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvxty"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojptj"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wbkp"]
+atlas = ExtResource("1_ugb8p")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jv1ba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s01qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t31i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4jap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyms")
+}],
+"loop": 1,
+"name": &"caminar_abajo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue4cr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvxty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojptj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wbkp")
+}],
+"loop": 1,
+"name": &"caminar_arriba",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hc1i4"]
+radius = 11.0
+
+[node name="Miguel" type="CharacterBody2D" unique_id=2021143498]
+script = ExtResource("1_42hbi")
+dialogo = ExtResource("2_b6t5i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=202452231]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_5ieep")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=466675096]
+sprite_frames = SubResource("SpriteFrames_jv1ba")
+animation = &"caminar_abajo"
+
+[node name="ZonaInteraccion" type="Area2D" parent="." unique_id=2124867878]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion" unique_id=803033061]
+shape = SubResource("CircleShape2D_hc1i4")

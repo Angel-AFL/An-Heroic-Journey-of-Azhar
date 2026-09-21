@@ -1,0 +1,22 @@
+~ start
+Miguel: ¡Hola! Soy Miguel. Algún día seré un gran héroe, como los de las leyendas.
+Miguel: Me paso el día aquí, haciendo guardia... aunque nunca pasa nada.
+Miguel: ¿Y tú? Se te ve con pinta de aventurero.
+
+- ¿Por qué quieres ser héroe?
+	Miguel: Porque quiero ver el mundo entero: el bosque, el desierto, la nieve...
+	Miguel: Quiero ayudar a la gente y vivir mil aventuras. ¡Como tú!
+	=> start
+- ¿Haces guardia tú solo?
+	Miguel: Sí. Alguien tiene que vigilar la entrada, aunque sea un niño.
+	Miguel: Mi madre dice que soy muy valiente. Yo creo que se lo inventa.
+	=> start
+- ¿Qué sabes del mundo exterior?
+	Miguel: ¡De todo! Los mercaderes cuentan historias al pasar por la villa.
+	Miguel: Dicen que más allá del bosque hay criaturas terribles... ¡y tesoros!
+	=> start
+- ¿Quieres venir conmigo?
+	Miguel: ¿De verdad? ¡Sería increíble! ...Pero todavía soy pequeño.
+	Miguel: Cuando sea mayor saldré a recorrer el mundo y seré un gran héroe.
+	Miguel: ¡Hasta entonces te estaré esperando aquí! Cuídate, aventurero.
+	=> END
