@@ -127,9 +127,15 @@ verify changes by running the game through the `godot_ai` MCP addon.
   bus. API: `reproducir(stream, volumen_db = 0.0)` reuses the first idle player. Because it
   is global, the sound keeps playing after the node that triggered it (e.g. a coin) frees
   itself — don't add a per-node `AudioStreamPlayer` for one-shot SFX.
-- `default_bus_layout.tres` defines buses `Master` + `SFX` (project setting
-  `audio/buses/default_bus_layout` points there by default). Route new SFX through `SFX` so
-  effect volume stays separate from music.
+- `default_bus_layout.tres` defines buses `Master` + `SFX` + `Musica` (project setting
+  `audio/buses/default_bus_layout` points there by default). Route new SFX through `SFX` and
+  music through `Musica` so effect volume stays separate from music.
+- Level music lives in the level scene as an `AudioStreamPlayer` (`autoplay = true`,
+  `bus = "Musica"`), e.g. `MusicaVilla` in `scenes/villa/villa.tscn` playing
+  `res://audio/villa.wav`. Being scene-local it stops when the level unloads and restarts on
+  re-entry; loop is enabled in the asset's `.import` (`edit/loop_mode=2`, "Forward").
+  Adding a bus to `default_bus_layout.tres` requires an editor restart (or reloading
+  `AudioServer.set_bus_layout`) before the inspector accepts the new bus name.
 - Reference the autoload the same way as `Monedero`: `const SonidoTipo = preload("res://scripts/sonido.gd")`
   then `get_node("/root/Sonido") as SonidoTipo`.
 - Supported native formats: WAV (`AudioStreamWAV`, short SFX), OGG Vorbis (`AudioStreamOggVorbis`,

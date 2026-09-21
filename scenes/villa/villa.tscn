@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ds6eetn3k20oi" path="res://scenes/npcs/joel_npc.tscn" id="4_yr8e7"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_14xes"]
 [ext_resource type="PackedScene" uid="uid://bsvewru48yice" path="res://scenes/npcs/miguel_npc.tscn" id="6_1n6g3"]
+[ext_resource type="AudioStream" uid="uid://inekaxqatokr" path="res://audio/villa.wav" id="7_hh8rf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr8e7"]
 size = Vector2(26, 45)
@@ -70,3 +71,8 @@ position = Vector2(-151, -104)
 
 [node name="Miguel" parent="." unique_id=2021143498 instance=ExtResource("6_1n6g3")]
 position = Vector2(0, -30)
+
+[node name="MusicaVilla" type="AudioStreamPlayer" parent="." unique_id=416401121]
+stream = ExtResource("7_hh8rf")
+autoplay = true
+bus = &"Musica"
