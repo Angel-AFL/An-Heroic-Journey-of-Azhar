@@ -7,6 +7,9 @@ signal vida_cambiada(vida_actual: int, vida_maxima: int)
 signal murio
 
 const MejorasTipo = preload("res://scripts/mejoras.gd")
+const SonidoTipo = preload("res://scripts/sonido.gd")
+const SONIDO_ATAQUE: AudioStream = preload("res://audio/ataque.wav")
+const SONIDO_GOLPE_ENEMIGO: AudioStream = preload("res://audio/golpe-enemigo.wav")
 
 @export var speed: float = 130.0
 @export var attack_duration: float = 0.3
@@ -27,6 +30,7 @@ var _golpeados: Array = []
 @onready var _inv_timer: Timer = $InvulnerabilidadTimer
 @onready var _espada: Sprite2D = $Espada
 @onready var _mejoras: MejorasTipo = get_node("/root/Mejoras") as MejorasTipo
+@onready var _sonido: SonidoTipo = get_node("/root/Sonido") as SonidoTipo
 
 
 func _ready() -> void:
@@ -135,6 +139,7 @@ func _aplicar_golpe(cuerpo: Node) -> void:
 	if not cuerpo.has_method("recibir_dano"):
 		return
 	_golpeados.append(cuerpo)
+	_sonido.reproducir(SONIDO_ATAQUE)
 	cuerpo.recibir_dano(dano_ataque)
 
 
@@ -143,6 +148,7 @@ func recibir_dano(cantidad: int) -> void:
 		return
 	vida = maxi(vida - cantidad, 0)
 	vida_cambiada.emit(vida, vida_maxima)
+	_sonido.reproducir(SONIDO_GOLPE_ENEMIGO)
 	_invulnerable = true
 	_inv_timer.start()
 	_parpadear()

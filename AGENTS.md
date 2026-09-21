@@ -94,6 +94,10 @@ verify changes by running the game through the `godot_ai` MCP addon.
   `SpriteMuerte` (Sprite2D, `visible = false`) and `TimerDano` (Timer, `one_shot = true`).
 - Collision layers: enemies are on `collision_layer = 2` so the player's `Hitbox`
   (`collision_mask = 2`) can hit them; their `ZonaContacto` (mask 1) detects the player.
+- Combat SFX (via `Sonido`): `personaje.gd` `_aplicar_golpe()` plays `res://audio/ataque.wav`
+  only when a hit lands (once per enemy, not on a whiffed swing); `recibir_dano()` plays
+  `res://audio/golpe-enemigo.wav` after its checks, so it respects invulnerability (no spam
+  while blinking).
 - Levels place enemies under a `Enemigos` Node2D and instance `res://scenes/ui/hud.tscn`
   (heart HUD via `scripts/hud_corazones.gd`, driven by the `Personaje.vida_cambiada` signal).
   The player exposes `recibir_dano`/`vida_maxima` and reloads the scene on death.
@@ -130,6 +134,10 @@ verify changes by running the game through the `godot_ai` MCP addon.
   then `get_node("/root/Sonido") as SonidoTipo`.
 - Supported native formats: WAV (`AudioStreamWAV`, short SFX), OGG Vorbis (`AudioStreamOggVorbis`,
   music/loops), MP3 (`AudioStreamMP3`). No native FLAC/AAC.
+- Current SFX under `audio/`: `moneda.wav` (coin pickup, `moneda.gd`), `ataque.wav` (player
+  lands a hit, `personaje.gd:_aplicar_golpe`) and `golpe-enemigo.wav` (player takes damage,
+  `personaje.gd:recibir_dano`). Preload each as an `AudioStream` const and pass it to
+  `Sonido.reproducir`.
 
 ## Player animation
 
