@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cqd1b4hy7xunh"]
 
 [ext_resource type="Script" uid="uid://drn2xbeye7fvm" path="res://scripts/hud_corazones.gd" id="1_0mwgc"]
+[ext_resource type="Script" uid="uid://drkbuwwirpawe" path="res://scripts/hud_monedas.gd" id="2_bo48s"]
+[ext_resource type="Texture2D" uid="uid://ckapkvo5bqqpr" path="res://sprites/Items/Tesoros/MonedaPlateada.png" id="3_8qguk"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1744036134]
 
@@ -9,5 +11,30 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_0mwgc")
+
+[node name="Monedas" type="HBoxContainer" parent="." unique_id=2087799613]
+offset_left = 8.0
+offset_top = 34.0
+offset_right = 38.0
+offset_bottom = 57.0
+mouse_filter = 2
+theme_override_constants/separation = 4
+script = ExtResource("2_bo48s")
+
+[node name="Icono" type="TextureRect" parent="Monedas" unique_id=1032158269]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_8qguk")
+
+[node name="Etiqueta" type="Label" parent="Monedas" unique_id=537637668]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.101960786, 0.0627451, 0.0627451, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "0"
