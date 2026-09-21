@@ -6,6 +6,8 @@ extends CharacterBody2D
 signal vida_cambiada(vida_actual: int, vida_maxima: int)
 signal murio
 
+const MejorasTipo = preload("res://scripts/mejoras.gd")
+
 @export var speed: float = 130.0
 @export var attack_duration: float = 0.3
 @export var vida_maxima: int = 3
@@ -24,10 +26,12 @@ var _golpeados: Array = []
 @onready var _hitbox: Area2D = $Hitbox
 @onready var _inv_timer: Timer = $InvulnerabilidadTimer
 @onready var _espada: Sprite2D = $Espada
+@onready var _mejoras: MejorasTipo = get_node("/root/Mejoras") as MejorasTipo
 
 
 func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	vida_maxima = _mejoras.vida_maxima()
 	vida = vida_maxima
 	_attack_timer.wait_time = attack_duration
 	_attack_timer.timeout.connect(_on_attack_finished)
@@ -37,6 +41,7 @@ func _ready() -> void:
 	_hitbox.body_entered.connect(_on_hitbox_body_entered)
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	_mejoras.cambiado.connect(sincronizar_vida_maxima)
 	vida_cambiada.emit(vida, vida_maxima)
 
 
@@ -143,6 +148,14 @@ func recibir_dano(cantidad: int) -> void:
 	_parpadear()
 	if vida <= 0:
 		_morir()
+
+
+func sincronizar_vida_maxima(nuevo_maximo: int) -> void:
+	var ganancia := nuevo_maximo - vida_maxima
+	vida_maxima = nuevo_maximo
+	if ganancia > 0:
+		vida += ganancia
+	vida_cambiada.emit(vida, vida_maxima)
 
 
 func _morir() -> void:

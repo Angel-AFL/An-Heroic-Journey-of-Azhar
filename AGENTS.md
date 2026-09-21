@@ -30,7 +30,8 @@ verify changes by running the game through the `godot_ai` MCP addon.
 ## Architecture
 
 - Autoloads (`project.godot`): `Transicion` (scene fades), `Monedero` (global coin
-  total), `DialogueManager` (dialogue_manager addon), `_mcp_game_helper` (godot_ai addon).
+  total), `Mejoras` (permanent upgrades: extra max hearts), `DialogueManager`
+  (dialogue_manager addon), `_mcp_game_helper` (godot_ai addon).
 - Every level instances `res://scenes/personaje/personaje.tscn` as a node named exactly
   `Personaje`. `scripts/transicion.gd` repositions the node found by that literal name, and
   `scripts/zona_transicion.gd` triggers on group `personaje` — preserve both when editing levels.
@@ -38,6 +39,21 @@ verify changes by running the game through the `godot_ai` MCP addon.
   `punto_entrada`); destination markers live under `PuntosEntrada/<DesdeX>` in each level.
 - Dialogue: `scripts/npc_dialogo.gd` calls `DialogueManager.show_dialogue_balloon(resource, cue)`;
   dialogue sources are `.dialogue` files under `dialogues/`.
+
+## Dialogue / merchants
+
+- The default balloon is `scenes/ui/dialogue_balloon.tscn` + `scripts/dialogue_balloon.gd`
+  (registered in `dialogue_manager/runtime/balloon_path`). Its `ResponsesMenu` sets
+  `hide_failed_responses = true`, so response options whose `[if ... /]` is false are
+  **hidden** instead of shown as disabled/dark buttons. Keep that flag if you don't want
+  greyed-out options.
+- Dialogue Manager supports `if`/`else` blocks and responses nested by tab indentation, so a
+  response body can branch and offer follow-up options (see `dialogues/joel_dialogue.dialogue`).
+- `scripts/comerciante.gd` (on `scenes/npcs/joel_npc.tscn`) registers the `Comerciante` state
+  context: `al_maximo()`, `precio_actual()`, `puede_comprar()` and `comprar_corazon()`, backed
+  by `Mejoras.corazones_extra` and the `Monedero` autoload. `joel_dialogue.dialogue` uses them:
+  the single option `¿Puedes hacerme más fuerte?` states the price and offers the purchase as a
+  second step when affordable.
 
 ## Enemies / combat
 

@@ -3,6 +3,23 @@ Joel: ¡Vaya, un viajero por la villa! No te había visto antes.
 Joel: Me llamo Joel, comercio con lo que traigo de mis viajes.
 Joel: ¿En qué puedo ayudarte?
 
+- ¿Puedes hacerme más fuerte?
+	if Comerciante.al_maximo():
+		Joel: Ya tienes todos los corazones que puedo darte, amigo.
+		=> start
+	else:
+		Joel: El siguiente corazón cuesta {{Comerciante.precio_actual()}} monedas.
+		if Comerciante.puede_comprar():
+			Joel: ¿Te lo llevas?
+			- Comprar un corazón extra ({{Comerciante.precio_actual()}} monedas).
+				do Comerciante.comprar_corazon()
+				Joel: ¡Trato hecho! Ahora aguantarás un golpe más.
+				=> start
+			- Ahora no.
+				=> start
+		else:
+			Joel: Vuelve cuando las tengas.
+			=> start
 - Quiero ver tus mercancías.
 	Joel: Claro, echa un vistazo a mi arcón.
 	Joel: Tengo pociones, pergaminos y alguna que otra reliquia.
