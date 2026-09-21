@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_n5mo8"]
 [ext_resource type="PackedScene" uid="uid://dh2v2wlybytuy" path="res://scenes/enemigos/slime.tscn" id="4_djhx6"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_ffbyw"]
+[ext_resource type="AudioStream" uid="uid://bes4ymy7tqey" path="res://audio/bosque-soundtrack.wav" id="6_bosm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vifm"]
 size = Vector2(23, 72)
@@ -109,3 +110,8 @@ position = Vector2(-321, 159)
 position = Vector2(-241, -14)
 
 [node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("5_ffbyw")]
+
+[node name="MusicaBosque" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_bosm1")
+autoplay = true
+bus = &"Musica"

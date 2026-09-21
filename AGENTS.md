@@ -132,7 +132,8 @@ verify changes by running the game through the `godot_ai` MCP addon.
   music through `Musica` so effect volume stays separate from music.
 - Level music lives in the level scene as an `AudioStreamPlayer` (`autoplay = true`,
   `bus = "Musica"`), e.g. `MusicaVilla` in `scenes/villa/villa.tscn` playing
-  `res://audio/villa-soundtrack.wav`. Being scene-local it stops when the level unloads and restarts on
+  `res://audio/villa-soundtrack.wav` and `MusicaBosque` in `scenes/bosque/bosque.tscn` playing
+  `res://audio/bosque-soundtrack.wav`. Being scene-local it stops when the level unloads and restarts on
   re-entry; loop is enabled in the asset's `.import` (`edit/loop_mode=2`, "Forward").
   Adding a bus to `default_bus_layout.tres` requires an editor restart (or reloading
   `AudioServer.set_bus_layout`) before the inspector accepts the new bus name.
