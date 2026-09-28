@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bfhgscckjjcfh" path="res://scripts/zona_transicion.gd" id="3_xfecq"]
 [ext_resource type="PackedScene" uid="uid://j03eichafyiy" path="res://scenes/enemigos/cactus.tscn" id="4_mjqie"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_5b8jf"]
+[ext_resource type="AudioStream" uid="uid://ddo58i6j8s73w" path="res://audio/desierto.mp3" id="6_5b8jf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0l5s8"]
 size = Vector2(24, 59)
@@ -75,3 +76,8 @@ position = Vector2(-120, 40)
 position = Vector2(-40, -240)
 
 [node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("5_5b8jf")]
+
+[node name="MusicaDesierto" type="AudioStreamPlayer" parent="." unique_id=463518868]
+stream = ExtResource("6_5b8jf")
+autoplay = true
+bus = &"Musica"
