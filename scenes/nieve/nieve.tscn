@@ -6,6 +6,7 @@
 [ext_resource type="Material" path="res://scenes/nieve/nieve_tinte.tres" id="4_mat"]
 [ext_resource type="PackedScene" uid="uid://b5jddddyvuos3" path="res://scenes/enemigos/flama_invierno.tscn" id="5_1f10p"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="6_cr3dc"]
+[ext_resource type="AudioStream" uid="uid://c2o0qpvxnymng" path="res://audio/nieve.mp3" id="7_cr3dc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zona"]
 size = Vector2(138, 32)
@@ -73,3 +74,8 @@ position = Vector2(-40, -260)
 position = Vector2(200, 200)
 
 [node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("6_cr3dc")]
+
+[node name="MusicaNieve" type="AudioStreamPlayer" parent="." unique_id=1424779652]
+stream = ExtResource("7_cr3dc")
+autoplay = true
+bus = &"Musica"
