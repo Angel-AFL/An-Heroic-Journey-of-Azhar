@@ -36,7 +36,7 @@ var _golpeados: Array = []
 func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	vida_maxima = _mejoras.vida_maxima()
-	vida = vida_maxima
+	vida = _mejoras.vida_guardada()
 	_attack_timer.wait_time = attack_duration
 	_attack_timer.timeout.connect(_on_attack_finished)
 	_inv_timer.one_shot = true
@@ -147,6 +147,7 @@ func recibir_dano(cantidad: int) -> void:
 	if cantidad <= 0 or _invulnerable or vida <= 0:
 		return
 	vida = maxi(vida - cantidad, 0)
+	_mejoras.establecer_vida(vida)
 	vida_cambiada.emit(vida, vida_maxima)
 	_sonido.reproducir(SONIDO_GOLPE_ENEMIGO)
 	_invulnerable = true
@@ -157,10 +158,8 @@ func recibir_dano(cantidad: int) -> void:
 
 
 func sincronizar_vida_maxima(nuevo_maximo: int) -> void:
-	var ganancia := nuevo_maximo - vida_maxima
 	vida_maxima = nuevo_maximo
-	if ganancia > 0:
-		vida += ganancia
+	vida = _mejoras.vida_guardada()
 	vida_cambiada.emit(vida, vida_maxima)
 
 
@@ -171,6 +170,7 @@ func _morir() -> void:
 	_hitbox.monitoring = false
 	_guardar_espada()
 	_sprite.modulate.a = 1.0
+	_mejoras.reiniciar_vida()
 	await get_tree().create_timer(0.6).timeout
 	get_tree().reload_current_scene()
 
