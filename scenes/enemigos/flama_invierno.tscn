@@ -49,8 +49,13 @@ size = Vector2(18, 14)
 [node name="FlamaInvierno" type="CharacterBody2D" unique_id=1333311051]
 collision_layer = 2
 script = ExtResource("1_xodo8")
-vida_maxima = 2
-velocidad = 70.0
+vida_maxima = 4
+velocidad = 95.0
+radio_deteccion = 170.0
+dano_contacto = 2
+cadencia_dano = 0.5
+persecucion_memoria = 1.5
+embestida_activa = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=390322828]
 position = Vector2(0, 0.5)

@@ -6,7 +6,7 @@ extends Node
 
 signal cambiado(vida_maxima: int)
 
-const VIDA_BASE: int = 3
+const VIDA_BASE: int = 5
 
 var corazones_extra: int = 0
 var vida_actual: int = -1
