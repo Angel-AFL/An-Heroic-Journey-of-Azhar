@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://vij7kxck0cst" path="res://scripts/npc_dialogo.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cqlpi846o30j4" path="res://sprites/Personajes/NPC/Woman/SeparateAnim/Idle.png" id="2_idle"]
+[ext_resource type="Resource" uid="uid://cte88t7oeeqto" path="res://dialogues/rosa_dialogue.dialogue" id="3_dialogo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_colision"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0"]
+atlas = ExtResource("2_idle")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("2_idle")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
+atlas = ExtResource("2_idle")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3"]
+atlas = ExtResource("2_idle")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_idle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interaccion"]
+radius = 11.0
+
+[node name="Rosa" type="CharacterBody2D"]
+script = ExtResource("1_script")
+dialogo = ExtResource("3_dialogo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_colision")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_idle")
+animation = &"idle"
+autoplay = &"idle"
+
+[node name="ZonaInteraccion" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion"]
+shape = SubResource("CircleShape2D_interaccion")

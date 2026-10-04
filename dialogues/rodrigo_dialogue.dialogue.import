@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://ndqpnojmebam"
+path="res://.godot/imported/rodrigo_dialogue.dialogue-eb549acf4aef642e4754b615e2828242.tres"
+
+[deps]
+
+source_file="res://dialogues/rodrigo_dialogue.dialogue"
+dest_files=["res://.godot/imported/rodrigo_dialogue.dialogue-eb549acf4aef642e4754b615e2828242.tres"]
+
+[params]
+
+defaults=true

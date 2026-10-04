@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://yi170b57coa0"
+path="res://.godot/imported/anselmo_dialogue.dialogue-d1c99dc912358aefbf58be1afda607ba.tres"
+
+[deps]
+
+source_file="res://dialogues/anselmo_dialogue.dialogue"
+dest_files=["res://.godot/imported/anselmo_dialogue.dialogue-d1c99dc912358aefbf58be1afda607ba.tres"]
+
+[params]
+
+defaults=true

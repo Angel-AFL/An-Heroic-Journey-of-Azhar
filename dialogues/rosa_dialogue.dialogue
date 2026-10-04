@@ -1,0 +1,19 @@
+~ start
+Rosa: ¡Ay, un forastero! Qué alegría ver caras nuevas por la villa.
+Rosa: Me llamo Rosa. Llevo el puesto del mercado desde que era niña.
+Rosa: ¿Te apetece charlar un rato?
+
+- ¿Qué se cuenta por aquí?
+	Rosa: Pues que el bosque está revuelto últimamente. Cada vez salen más bichos.
+	Rosa: Miguel, el niño de la guardia, dice que él los espantaría solo. ¡Qué cosas!
+	=> start
+- ¿Ves algo raro en mí?
+	Rosa: Solo veo a alguien con muchas leguas en los pies. Y con buena estrella, espero.
+	=> start
+- ¿Me vendes algo?
+	Rosa: Fruta tengo, pero para armas o pociones mejor habla con Joel.
+	Rosa: Está ahí al lado, con su arcón de maravillas.
+	=> start
+- Me voy, tengo prisa.
+	Rosa: ¡Vuelve cuando quieras, forastero! Aquí siempre hay un hueco junto al fuego.
+	=> END

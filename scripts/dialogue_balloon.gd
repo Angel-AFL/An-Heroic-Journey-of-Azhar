@@ -24,6 +24,12 @@ extends CanvasLayer
 ## se usa RETRATO_POR_DEFECTO.
 const RETRATOS := {
 	"Miguel": preload("res://sprites/Personajes/NPC/Villager/Faceset.png"),
+	"Rodrigo": preload("res://sprites/Personajes/NPC/Herrero/Faceset.png"),
+	"Rosa": preload("res://sprites/Personajes/NPC/Woman/Faceset.png"),
+	"Anselmo": preload("res://sprites/Personajes/NPC/OldMan2/Faceset.png"),
+	"Pablo": preload("res://sprites/Personajes/NPC/Villager3/Faceset.png"),
+	"Maritza": preload("res://sprites/Personajes/NPC/Villager4/Faceset.png"),
+	"Gonzalo": preload("res://sprites/Personajes/NPC/Inspector/Faceset.png"),
 }
 const RETRATO_POR_DEFECTO: Texture2D = preload("res://sprites/Personajes/NPC/Comerciante/Faceset.png")
 

@@ -1,0 +1,20 @@
+~ start
+Rodrigo: ¡Bienvenido a mi herrería, forastero!
+Rodrigo: Soy Rodrigo, el herrero de la villa. Si algo se rompe, aquí se arregla.
+Rodrigo: ¿Necesitas algo?
+
+- ¿Qué forjas aquí?
+	Rodrigo: De todo: azadas, ollas, herraduras... y alguna que otra espada.
+	Rodrigo: Un buen acero aguanta más que la mejor armadura, ¿sabes?
+	=> start
+- ¿Puedes venderme un arma?
+	Rodrigo: Je, todavía no. Mi mejor espada sigue en la fragua.
+	Rodrigo: Vuelve cuando esté lista y hablamos.
+	=> start
+- ¿Conoces el mundo exterior?
+	Rodrigo: De oídas. Los viajeros traen hierro del desierto y pieles de la nieve.
+	Rodrigo: Yo me quedo aquí, junto al fuego. Alguien tiene que forjar.
+	=> start
+- Solo pasaba a saludar.
+	Rodrigo: ¡Que no se te oxiden las botas, aventurero!
+	=> END

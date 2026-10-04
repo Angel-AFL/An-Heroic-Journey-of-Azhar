@@ -1,0 +1,20 @@
+~ start
+Maritza: Hola, viajero. No te había visto por la villa.
+Maritza: Soy Maritza. Ayudo a mi madre en la panadería, junto a la plaza.
+Maritza: ¿Buscabas algo?
+
+- ¿Qué hay más allá de la villa?
+	Maritza: Al este dicen que empieza el desierto, y al norte la nieve.
+	Maritza: Los mercaderes vuelven con las manos heladas y mil historias.
+	=> start
+- ¿Tienes miedo de los monstruos?
+	Maritza: Un poco. Por eso no salgo de la muralla sin compañía.
+	Maritza: Tú sí que pareces valiente. ¿Has luchado contra alguno?
+	=> start
+- Huele a pan recién hecho.
+	Maritza: ¡Claro! Es lo primero que horneamos al amanecer.
+	Maritza: Toma, si pasas luego por el puesto te guardo un bollo.
+	=> start
+- Me marcho, gracias.
+	Maritza: ¡Que tengas buen viaje! Y cuidado con el bosque.
+	=> END

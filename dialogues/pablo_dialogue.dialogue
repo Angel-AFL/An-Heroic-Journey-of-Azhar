@@ -1,0 +1,20 @@
+~ start
+Pablo: ¡Eh, tú! Sí, tú, el de la capa. ¿Vienes de lejos?
+Pablo: Soy Pablo. Trabajo cargando mercancía para Joel, el comerciante.
+Pablo: ¿Qué quieres?
+
+- ¿Qué vende Joel?
+	Pablo: Pociones, pergaminos, reliquias raras... y hasta corazones, dicen.
+	Pablo: Yo solo cargo las cajas. Pero he visto cosas que no te creerías.
+	=> start
+- ¿Hay trabajo por la villa?
+	Pablo: Para brazos fuertes, siempre. Para espadas, mejor pregunta a Miguel.
+	Pablo: Aunque ese crío solo hace guardia... por ahora.
+	=> start
+- ¿Conoces algún atajo?
+	Pablo: Al bosque se va por el oeste, cruzando la plaza.
+	Pablo: Y no te acerques al agua. No es tan profunda como parece, pero resbala.
+	=> start
+- Nada, sigue con lo tuyo.
+	Pablo: ¡A mandar! Si necesitas que cargue algo, ya sabes.
+	=> END

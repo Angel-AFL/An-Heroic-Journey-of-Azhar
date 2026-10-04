@@ -1,0 +1,20 @@
+~ start
+Gonzalo: Alto. ...Ah, un viajero. Tranquilo, solo hago mi ronda.
+Gonzalo: Soy Gonzalo, guardia de la villa. Vigilo que no entre nada raro.
+Gonzalo: ¿Qué se te ofrece?
+
+- ¿Hay peligro por aquí?
+	Gonzalo: Dentro de la muralla, poco. Fuera, bastante más.
+	Gonzalo: Slimes en el bosque, cactus en el desierto, flamas en la nieve. No bajes la guardia.
+	=> start
+- ¿Necesitas ayuda con algo?
+	Gonzalo: Agradezco el ofrecimiento, pero mi deber es quedarme aquí.
+	Gonzalo: Tú ocúpate de los caminos. Eso ya me ayuda.
+	=> start
+- ¿Cómo entro al bosque?
+	Gonzalo: Por la zona oeste, la que cruza la plaza. Sigue el sendero y no te pierdas.
+	Gonzalo: Y vuelve entero, ¿me oyes?
+	=> start
+- Solo pasaba.
+	Gonzalo: Circula. Y buena suerte ahí fuera, forastero.
+	=> END
