@@ -54,6 +54,9 @@ position = Vector2(-455, 32)
 [node name="DesdeNieve" type="Node2D" parent="PuntosEntrada" unique_id=1799164573]
 position = Vector2(169, -289)
 
+[node name="DesdeMenu" type="Node2D" parent="PuntosEntrada"]
+position = Vector2(0, 0)
+
 [node name="ZonasTransicion" type="Node2D" parent="." unique_id=282414986]
 
 [node name="ZonaVilla" type="Area2D" parent="ZonasTransicion" unique_id=511233648]
