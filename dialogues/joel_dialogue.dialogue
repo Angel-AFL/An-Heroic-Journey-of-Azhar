@@ -22,8 +22,23 @@ Joel: ¿En qué puedo ayudarte?
 			=> start
 - Quiero ver tus mercancías.
 	Joel: Claro, echa un vistazo a mi arcón.
-	Joel: Tengo pociones, pergaminos y alguna que otra reliquia.
-	=> start
+	Joel: ¿Qué te llevas?
+	- Poción de vida ({{Comerciante.precio_item("pocion_vida")}} monedas).
+		if Comerciante.puede_comprar_item("pocion_vida"):
+			do Comerciante.comprar_item("pocion_vida")
+			Joel: ¡Buena elección! Aquí tienes.
+		else:
+			Joel: Te falta oro para eso, amigo.
+		=> start
+	- Espada oxidada ({{Comerciante.precio_item("espada")}} monedas).
+		if Comerciante.puede_comprar_item("espada"):
+			do Comerciante.comprar_item("espada")
+			Joel: Cuídala bien, forastero.
+		else:
+			Joel: Te falta oro para eso, amigo.
+		=> start
+	- Ahora no.
+		=> start
 - ¿Qué se sabe del mundo exterior?
 	Joel: Se cuentan muchas historias, pocas son ciertas.
 	Joel: Dicen que al norte los caminos están plagados de bandidos.

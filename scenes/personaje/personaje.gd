@@ -8,6 +8,7 @@ signal murio
 
 const MejorasTipo = preload("res://scripts/mejoras.gd")
 const SonidoTipo = preload("res://scripts/sonido.gd")
+const EquipoTipo = preload("res://scripts/equipo.gd")
 const SONIDO_ATAQUE: AudioStream = preload("res://audio/ataque.wav")
 const SONIDO_GOLPE_ENEMIGO: AudioStream = preload("res://audio/golpe-enemigo.wav")
 
@@ -15,6 +16,7 @@ const SONIDO_GOLPE_ENEMIGO: AudioStream = preload("res://audio/golpe-enemigo.wav
 @export var attack_duration: float = 0.3
 @export var vida_maxima: int = 3
 @export var dano_ataque: int = 1
+@export var dano_espada: int = 2
 @export var invulnerabilidad: float = 0.8
 
 var puede_moverse: bool = true
@@ -23,6 +25,7 @@ var direccion: Vector2 = Vector2.DOWN
 var vida: int = 0
 var _invulnerable: bool = false
 var _golpeados: Array = []
+var _espada_equipada: bool = false
 
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _attack_timer: Timer = $AttackTimer
@@ -31,6 +34,7 @@ var _golpeados: Array = []
 @onready var _espada: Sprite2D = $Espada
 @onready var _mejoras: MejorasTipo = get_node("/root/Mejoras") as MejorasTipo
 @onready var _sonido: SonidoTipo = get_node("/root/Sonido") as SonidoTipo
+@onready var _equipo: EquipoTipo = get_node("/root/Equipo") as EquipoTipo
 
 
 func _ready() -> void:
@@ -46,6 +50,8 @@ func _ready() -> void:
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	_mejoras.cambiado.connect(sincronizar_vida_maxima)
+	_espada_equipada = _equipo.esta_equipada(&"espada")
+	_equipo.arma_cambiada.connect(_on_arma_cambiada)
 	vida_cambiada.emit(vida, vida_maxima)
 
 
@@ -89,7 +95,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_sprite.play("atacar-" + _dir_name(direccion))
 		_attack_timer.start()
 		_activar_hitbox()
-		_empunar_espada()
+		if _espada_equipada:
+			_empunar_espada()
 
 
 func _activar_hitbox() -> void:
@@ -140,7 +147,8 @@ func _aplicar_golpe(cuerpo: Node) -> void:
 		return
 	_golpeados.append(cuerpo)
 	_sonido.reproducir(SONIDO_ATAQUE)
-	cuerpo.recibir_dano(dano_ataque)
+	var dano := dano_espada if _espada_equipada else dano_ataque
+	cuerpo.recibir_dano(dano)
 
 
 func recibir_dano(cantidad: int) -> void:
@@ -161,6 +169,22 @@ func sincronizar_vida_maxima(nuevo_maximo: int) -> void:
 	vida_maxima = nuevo_maximo
 	vida = _mejoras.vida_guardada()
 	vida_cambiada.emit(vida, vida_maxima)
+
+
+## Cura vida hasta el máximo. Devuelve false si ya está al máximo o si está muerto.
+func curar(cantidad: int) -> bool:
+	if cantidad <= 0 or vida <= 0 or vida >= vida_maxima:
+		return false
+	vida = mini(vida + cantidad, vida_maxima)
+	_mejoras.establecer_vida(vida)
+	vida_cambiada.emit(vida, vida_maxima)
+	return true
+
+
+func _on_arma_cambiada(id: StringName) -> void:
+	_espada_equipada = id == &"espada"
+	if not _espada_equipada:
+		_guardar_espada()
 
 
 func _morir() -> void:
