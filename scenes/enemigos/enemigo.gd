@@ -12,6 +12,7 @@ signal murio
 @export var dano_contacto: int = 1
 @export var cadencia_dano: float = 1.0
 @export var empuje: float = 110.0
+@export var duracion_empuje: float = 0.15
 @export var monedas_al_morir: int = 1
 @export var escena_moneda: PackedScene = preload("res://scenes/items/moneda.tscn")
 
@@ -19,6 +20,8 @@ var vida: int = 0
 var _jugador: Node2D = null
 var _muerto: bool = false
 var _puede_danar: bool = true
+var _empuje_restante: float = 0.0
+var _direccion_empuje: Vector2 = Vector2.ZERO
 
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _zona_contacto: Area2D = $ZonaContacto
@@ -36,8 +39,14 @@ func _ready() -> void:
 	_timer_dano.timeout.connect(_on_timer_dano_timeout)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if _muerto:
+		return
+
+	if _empuje_restante > 0.0:
+		_empuje_restante -= delta
+		velocity = _direccion_empuje * empuje * (_empuje_restante / duracion_empuje)
+		move_and_slide()
 		return
 
 	_actualizar_jugador()
@@ -82,8 +91,9 @@ func recibir_dano(cantidad: int) -> void:
 	vida -= cantidad
 	_flash()
 	if is_instance_valid(_jugador):
-		var direccion := (global_position - _jugador.global_position).normalized()
-		velocity = direccion * empuje
+		_direccion_empuje = (global_position - _jugador.global_position).normalized()
+		_empuje_restante = duracion_empuje
+		velocity = _direccion_empuje * empuje
 		move_and_slide()
 	if vida <= 0:
 		morir()
