@@ -49,6 +49,8 @@ size = Vector2(18, 14)
 [node name="Slime" type="CharacterBody2D" unique_id=283301970]
 collision_layer = 2
 script = ExtResource("1_4hgb2")
+persecucion_memoria = 1.0
+separacion = 18.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1784517143]
 position = Vector2(0, 1)

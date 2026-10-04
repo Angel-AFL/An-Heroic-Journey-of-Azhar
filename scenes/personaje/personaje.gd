@@ -18,6 +18,7 @@ const SONIDO_GOLPE_ENEMIGO: AudioStream = preload("res://audio/golpe-enemigo.wav
 @export var dano_ataque: int = 1
 @export var dano_espada: int = 2
 @export var invulnerabilidad: float = 0.8
+@export var alcance_ataque: float = 22.0
 
 var puede_moverse: bool = true
 var atacando: bool = false
@@ -145,6 +146,8 @@ func _aplicar_golpe(cuerpo: Node) -> void:
 		return
 	if not cuerpo.has_method("recibir_dano"):
 		return
+	if not (cuerpo is Node2D) or global_position.distance_to(cuerpo.global_position) > alcance_ataque:
+		return
 	_golpeados.append(cuerpo)
 	_sonido.reproducir(SONIDO_ATAQUE)
 	var dano := dano_espada if _espada_equipada else dano_ataque
@@ -221,13 +224,13 @@ func _on_attack_finished() -> void:
 func _offset_hitbox() -> Vector2:
 	match _dir_name(direccion):
 		"derecha":
-			return Vector2(12, 0)
+			return Vector2(8, 0)
 		"izquierda":
-			return Vector2(-12, 0)
+			return Vector2(-8, 0)
 		"arriba":
-			return Vector2(0, -12)
+			return Vector2(0, -8)
 		_:
-			return Vector2(0, 12)
+			return Vector2(0, 8)
 
 
 func _play_idle() -> void:
