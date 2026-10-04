@@ -20,6 +20,13 @@ extends CanvasLayer
 ## Acción para saltar el efecto de escritura.
 @export var skip_action: StringName = &"interactuar"
 
+## Acción ficticia usada para bloquear la confirmación de opciones mientras la
+## tecla que omitió el texto sigue pulsada.
+const ACCION_BLOQUEADA: StringName = &"__respuestas_bloqueadas__"
+
+## Margen mínimo antes de permitir confirmar una opción.
+const DURACION_BLOQUEO_RESPUESTAS: float = 0.15
+
 ## Retrato mostrado por nombre de personaje. Si el nombre no está en el mapa
 ## se usa RETRATO_POR_DEFECTO.
 const RETRATOS := {
@@ -46,6 +53,8 @@ var is_waiting_for_input: bool = false
 var will_hide_balloon: bool = false
 var locals: Dictionary = {}
 var _locale: String = TranslationServer.get_locale()
+var _respuestas_bloqueadas: bool = false
+var _tiempo_bloqueo: float = 0.0
 
 var dialogue_line: DialogueLine:
 	set(value):
@@ -67,6 +76,9 @@ func _ready() -> void:
 	balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
+	if not InputMap.has_action(ACCION_BLOQUEADA):
+		InputMap.add_action(ACCION_BLOQUEADA)
+
 	if responses_menu.next_action.is_empty():
 		responses_menu.next_action = next_action
 
@@ -79,7 +91,18 @@ func _ready() -> void:
 		start()
 
 
-func _process(_delta: float) -> void:
+func _exit_tree() -> void:
+	if InputMap.has_action(ACCION_BLOQUEADA):
+		InputMap.erase_action(ACCION_BLOQUEADA)
+
+
+func _process(delta: float) -> void:
+	if _respuestas_bloqueadas:
+		_tiempo_bloqueo -= delta
+		if _tiempo_bloqueo <= 0.0 and not Input.is_action_pressed(next_action) and not Input.is_action_pressed(skip_action):
+			_respuestas_bloqueadas = false
+			responses_menu.next_action = next_action
+
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 
@@ -113,6 +136,9 @@ func start(with_dialogue_resource: DialogueResource = null, cue: String = "", ex
 ## Aplica una nueva DialogueLine al balloon.
 func apply_dialogue_line() -> void:
 	mutation_cooldown.stop()
+	_respuestas_bloqueadas = false
+	_tiempo_bloqueo = 0.0
+	responses_menu.next_action = next_action
 
 	progress.hide()
 	is_waiting_for_input = false
@@ -144,6 +170,9 @@ func apply_dialogue_line() -> void:
 		next(dialogue_line.next_id)
 	elif dialogue_line.responses.size() > 0:
 		balloon.focus_mode = Control.FOCUS_NONE
+		_respuestas_bloqueadas = true
+		_tiempo_bloqueo = DURACION_BLOQUEO_RESPUESTAS
+		responses_menu.next_action = ACCION_BLOQUEADA
 		responses_menu.show()
 	elif dialogue_line.time != "":
 		var time: float = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()

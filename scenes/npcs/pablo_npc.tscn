@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://j23gpl124ps0"]
 
 [ext_resource type="Script" uid="uid://vij7kxck0cst" path="res://scripts/npc_dialogo.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://cfff34s347pna" path="res://sprites/Personajes/NPC/Villager3/SeparateAnim/Idle.png" id="2_idle"]
@@ -11,32 +11,11 @@ size = Vector2(14, 14)
 atlas = ExtResource("2_idle")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
-atlas = ExtResource("2_idle")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
-atlas = ExtResource("2_idle")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3"]
-atlas = ExtResource("2_idle")
-region = Rect2(48, 0, 16, 16)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_idle"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3")
 }],
 "loop": 1,
 "name": &"idle",
@@ -46,20 +25,20 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_interaccion"]
 radius = 11.0
 
-[node name="Pablo" type="CharacterBody2D"]
+[node name="Pablo" type="CharacterBody2D" unique_id=1362471316]
 script = ExtResource("1_script")
 dialogo = ExtResource("3_dialogo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1101053722]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_colision")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1211140097]
 sprite_frames = SubResource("SpriteFrames_idle")
 animation = &"idle"
-autoplay = &"idle"
+autoplay = "idle"
 
-[node name="ZonaInteraccion" type="Area2D" parent="."]
+[node name="ZonaInteraccion" type="Area2D" parent="." unique_id=763446346]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion" unique_id=1601537947]
 shape = SubResource("CircleShape2D_interaccion")

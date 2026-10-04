@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d224ryo251oqs"]
 
 [ext_resource type="Script" uid="uid://daacif4q4wew0" path="res://scripts/guardia.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://debo2np4vfi73" path="res://sprites/Personajes/NPC/Inspector/SeparateAnim/Walk.png" id="2_walk"]
@@ -79,21 +79,21 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_interaccion"]
 radius = 11.0
 
-[node name="Gonzalo" type="CharacterBody2D"]
+[node name="Gonzalo" type="CharacterBody2D" unique_id=785817773]
 script = ExtResource("1_script")
-dialogo = ExtResource("3_dialogo")
 velocidad = 20.0
 recorrido = 48.0
+dialogo = ExtResource("3_dialogo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=130636346]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_colision")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1558065730]
 sprite_frames = SubResource("SpriteFrames_walk")
 animation = &"caminar_abajo"
 
-[node name="ZonaInteraccion" type="Area2D" parent="."]
+[node name="ZonaInteraccion" type="Area2D" parent="." unique_id=589992880]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion" unique_id=1598527012]
 shape = SubResource("CircleShape2D_interaccion")
