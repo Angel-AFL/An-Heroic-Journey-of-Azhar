@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://byaisbmeob30p"
+path="res://.godot/imported/gonzalo_dialogue.dialogue-a1eee24ac37771516b759123135f6c16.tres"
+
+[deps]
+
+source_file="res://dialogues/gonzalo_dialogue.dialogue"
+dest_files=["res://.godot/imported/gonzalo_dialogue.dialogue-a1eee24ac37771516b759123135f6c16.tres"]
+
+[params]
+
+defaults=true

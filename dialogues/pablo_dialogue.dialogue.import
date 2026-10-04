@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://b77fe2ss0ar1n"
+path="res://.godot/imported/pablo_dialogue.dialogue-a23219461ba92fc3f2bd2e6c3904c795.tres"
+
+[deps]
+
+source_file="res://dialogues/pablo_dialogue.dialogue"
+dest_files=["res://.godot/imported/pablo_dialogue.dialogue-a23219461ba92fc3f2bd2e6c3904c795.tres"]
+
+[params]
+
+defaults=true

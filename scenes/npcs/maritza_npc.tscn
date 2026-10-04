@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://xwq85mhney8o"]
+
+[ext_resource type="Script" uid="uid://vij7kxck0cst" path="res://scripts/npc_dialogo.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bf1dlwrvsmecb" path="res://sprites/Personajes/NPC/Villager4/SeparateAnim/Idle.png" id="2_idle"]
+[ext_resource type="Resource" uid="uid://uyd46apgr0ep" path="res://dialogues/maritza_dialogue.dialogue" id="3_dialogo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_colision"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0"]
+atlas = ExtResource("2_idle")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_idle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interaccion"]
+radius = 11.0
+
+[node name="Maritza" type="CharacterBody2D" unique_id=1164540795]
+script = ExtResource("1_script")
+dialogo = ExtResource("3_dialogo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1529326291]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_colision")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1657029661]
+sprite_frames = SubResource("SpriteFrames_idle")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="ZonaInteraccion" type="Area2D" parent="." unique_id=178131622]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion" unique_id=385089769]
+shape = SubResource("CircleShape2D_interaccion")

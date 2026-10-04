@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://uyd46apgr0ep"
+path="res://.godot/imported/maritza_dialogue.dialogue-3e215d1215f208fe1399f5e45882a69e.tres"
+
+[deps]
+
+source_file="res://dialogues/maritza_dialogue.dialogue"
+dest_files=["res://.godot/imported/maritza_dialogue.dialogue-3e215d1215f208fe1399f5e45882a69e.tres"]
+
+[params]
+
+defaults=true

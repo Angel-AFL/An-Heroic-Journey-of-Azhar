@@ -7,6 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_14xes"]
 [ext_resource type="PackedScene" uid="uid://bsvewru48yice" path="res://scenes/npcs/miguel_npc.tscn" id="6_1n6g3"]
 [ext_resource type="AudioStream" uid="uid://d37c58p5bavep" path="res://audio/villa-soundtrack.wav" id="7_hh8rf"]
+[ext_resource type="PackedScene" uid="uid://bwqfn4nh61g67" path="res://scenes/npcs/rodrigo_npc.tscn" id="8_8s5gt"]
+[ext_resource type="PackedScene" uid="uid://fxgd5rldxvus" path="res://scenes/npcs/rosa_npc.tscn" id="9_py8k1"]
+[ext_resource type="PackedScene" uid="uid://bw6a23b4vv3k3" path="res://scenes/npcs/anselmo_npc.tscn" id="10_qiwxk"]
+[ext_resource type="PackedScene" uid="uid://j23gpl124ps0" path="res://scenes/npcs/pablo_npc.tscn" id="11_thnkt"]
+[ext_resource type="PackedScene" uid="uid://xwq85mhney8o" path="res://scenes/npcs/maritza_npc.tscn" id="12_sqd8a"]
+[ext_resource type="PackedScene" uid="uid://d224ryo251oqs" path="res://scenes/npcs/gonzalo_npc.tscn" id="13_neei6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr8e7"]
 size = Vector2(26, 45)
@@ -70,9 +76,27 @@ position = Vector2(-151, -104)
 [node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("5_14xes")]
 
 [node name="Miguel" parent="." unique_id=2021143498 instance=ExtResource("6_1n6g3")]
-position = Vector2(0, -30)
+position = Vector2(-1, -160)
 
 [node name="MusicaVilla" type="AudioStreamPlayer" parent="." unique_id=416401121]
 stream = ExtResource("7_hh8rf")
 autoplay = true
 bus = &"Musica"
+
+[node name="Rodrigo" parent="." unique_id=1288265123 instance=ExtResource("8_8s5gt")]
+position = Vector2(100, -28)
+
+[node name="Rosa" parent="." unique_id=1899472498 instance=ExtResource("9_py8k1")]
+position = Vector2(134, -177)
+
+[node name="Anselmo" parent="." unique_id=537587486 instance=ExtResource("10_qiwxk")]
+position = Vector2(273, 97)
+
+[node name="Pablo" parent="." unique_id=1586995575 instance=ExtResource("11_thnkt")]
+position = Vector2(-118, -183)
+
+[node name="Maritza" parent="." unique_id=2119132273 instance=ExtResource("12_sqd8a")]
+position = Vector2(-59, 53)
+
+[node name="Gonzalo" parent="." unique_id=1092864095 instance=ExtResource("13_neei6")]
+position = Vector2(3, 116)

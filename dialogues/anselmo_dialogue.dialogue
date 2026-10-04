@@ -1,0 +1,20 @@
+~ start
+Anselmo: Ah... un joven aventurero. Hacía tiempo que no veía uno de verdad.
+Anselmo: Me llamo Anselmo. He visto pasar muchas estaciones por esta plaza.
+Anselmo: Siéntate, si tienes un momento. Las prisas no traen nada bueno.
+
+- ¿Qué sabes de Azhar?
+	Anselmo: Se dice que esta tierra lleva ese nombre desde antes de los reinos.
+	Anselmo: Que todo héroe que la recorre deja una huella... y que la tierra la recuerda.
+	=> start
+- ¿Has viajado mucho?
+	Anselmo: De joven llegué hasta el desierto. Luego la nieve me llamó, y no volví.
+	Anselmo: Ahora me basta con ver partir a otros. Es una buena forma de viajar.
+	=> start
+- ¿Algún consejo para un aventurero?
+	Anselmo: Escucha más de lo que hablas, y no luches cuando puedas caminar.
+	Anselmo: Los héroes que sobreviven son los que saben cuándo volver a casa.
+	=> start
+- Gracias por la charla, anciano.
+	Anselmo: Ve con cuidado, muchacho. Y no olvides mirar atrás de vez en cuando.
+	=> END
