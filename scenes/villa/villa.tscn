@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://j23gpl124ps0" path="res://scenes/npcs/pablo_npc.tscn" id="11_thnkt"]
 [ext_resource type="PackedScene" uid="uid://xwq85mhney8o" path="res://scenes/npcs/maritza_npc.tscn" id="12_sqd8a"]
 [ext_resource type="PackedScene" uid="uid://d224ryo251oqs" path="res://scenes/npcs/gonzalo_npc.tscn" id="13_neei6"]
+[ext_resource type="PackedScene" path="res://scenes/items/item_recogible.tscn" id="14_py8k1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr8e7"]
 size = Vector2(26, 45)
@@ -100,3 +101,11 @@ position = Vector2(-59, 53)
 
 [node name="Gonzalo" parent="." unique_id=1092864095 instance=ExtResource("13_neei6")]
 position = Vector2(3, 116)
+
+[node name="ItemPocionVida" parent="." unique_id=562508635 instance=ExtResource("14_py8k1")]
+position = Vector2(80, -82)
+item_id = &"pocion_vida"
+
+[node name="ItemEspada" parent="." unique_id=171344589 instance=ExtResource("14_py8k1")]
+position = Vector2(-80, -82)
+item_id = &"espada"

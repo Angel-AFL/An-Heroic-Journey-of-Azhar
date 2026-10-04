@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 ## Enemigo genérico: persigue al Personaje, hace daño por contacto y muere al
 ## recibir suficiente daño. Reutilizable por los distintos enemigos
-## (slime, cactus, flama_invierno...) mediante @export.
+## (slime, cactus, flama_invierno...) mediante @export. Puede soltar monedas
+## e items del inventario al morir.
 
 signal murio
 
@@ -15,6 +16,8 @@ signal murio
 @export var duracion_empuje: float = 0.15
 @export var monedas_al_morir: int = 1
 @export var escena_moneda: PackedScene = preload("res://scenes/items/moneda.tscn")
+@export var items_al_morir: Array[StringName] = []
+@export var escena_item: PackedScene = preload("res://scenes/items/item_recogible.tscn")
 
 var vida: int = 0
 var _jugador: Node2D = null
@@ -117,11 +120,25 @@ func _soltar_monedas() -> void:
 		escena.call_deferred("add_child", moneda)
 
 
+func _soltar_items() -> void:
+	if escena_item == null or items_al_morir.is_empty():
+		return
+	var escena := get_tree().current_scene
+	if escena == null:
+		return
+	for id in items_al_morir:
+		var item := escena_item.instantiate() as Node2D
+		item.item_id = id
+		item.position = global_position + Vector2(randf_range(-6.0, 6.0), randf_range(-6.0, 6.0))
+		escena.call_deferred("add_child", item)
+
+
 func morir() -> void:
 	if _muerto:
 		return
 	_muerto = true
 	_soltar_monedas()
+	_soltar_items()
 	velocity = Vector2.ZERO
 	_sprite.hide()
 	_sprite_muerte.show()
