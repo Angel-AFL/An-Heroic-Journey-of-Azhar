@@ -11,7 +11,7 @@ enum Estado { NORMAL, PREPARACION, EMBESTIDA }
 
 @export var vida_maxima: int = 5
 @export var velocidad: float = 78.0
-@export var radio_deteccion: float = 150.0
+@export var radio_deteccion: float = 90.0
 @export var dano_contacto: int = 1
 @export var cadencia_dano: float = 0.55
 @export var empuje: float = 150.0
