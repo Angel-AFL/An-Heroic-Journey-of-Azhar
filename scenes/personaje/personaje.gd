@@ -148,6 +148,8 @@ func _disparar_proyectil() -> void:
 	var proyectil := ESCENA_PROYECTIL.instantiate()
 	proyectil.dano = _dano_arma()
 	proyectil.textura = textura
+	proyectil.region = CatalogoArmas.region_proyectil(_arma_id)
+	proyectil.escala = CatalogoArmas.escala_proyectil(_arma_id)
 	proyectil.velocidad = CatalogoArmas.velocidad_proyectil(_arma_id)
 	proyectil.direccion = direccion.normalized()
 	escena.add_child(proyectil)

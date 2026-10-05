@@ -8,6 +8,8 @@ extends Area2D
 @export var velocidad: float = 240.0
 @export var duracion: float = 2.0
 @export var textura: Texture2D
+@export var region: Rect2 = Rect2()
+@export var escala: float = 1.0
 @export var direccion: Vector2 = Vector2.RIGHT
 
 @onready var _sprite: Sprite2D = $Sprite2D
@@ -17,6 +19,10 @@ extends Area2D
 func _ready() -> void:
 	if textura != null:
 		_sprite.texture = textura
+	if region.size.x > 0.0 and region.size.y > 0.0:
+		_sprite.region_enabled = true
+		_sprite.region_rect = region
+	_sprite.scale = Vector2.ONE * escala
 	rotation = direccion.angle()
 	body_entered.connect(_on_body_entered)
 	_timer.timeout.connect(queue_free)

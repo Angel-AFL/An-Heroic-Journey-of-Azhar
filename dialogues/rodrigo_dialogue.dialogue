@@ -34,10 +34,10 @@ Rodrigo: ¿Necesitas algo?
 		else:
 			Rodrigo: Te falta oro para eso, amigo.
 		=> start
-	- Arco ({{Herrero.precio_item("arco")}} monedas).
-		if Herrero.puede_comprar_item("arco"):
-			do Herrero.comprar_item("arco")
-			Rodrigo: Dispara desde lejos. Tú verás.
+	- Kunai ({{Herrero.precio_item("kunai")}} monedas).
+		if Herrero.puede_comprar_item("kunai"):
+			do Herrero.comprar_item("kunai")
+			Rodrigo: Se lanza desde lejos. Tú verás.
 		else:
 			Rodrigo: Te falta oro para eso, amigo.
 		=> start

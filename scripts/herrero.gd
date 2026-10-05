@@ -6,7 +6,7 @@ extends "res://scripts/comerciante.gd"
 @export var precios_armas: Dictionary = {
 	"hueso": 15,
 	"espada": 40,
-	"arco": 60,
+	"kunai": 60,
 	"vara": 65,
 	"tridente": 70,
 	"baston": 80,

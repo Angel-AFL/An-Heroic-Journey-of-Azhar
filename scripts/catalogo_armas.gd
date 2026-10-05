@@ -35,14 +35,16 @@ const ARMAS := {
 		"alcance": 26.0,
 		"sprite_mano": preload("res://sprites/Items/Armas/Mazo.png"),
 	},
-	&"arco": {
+	&"kunai": {
 		"tipo": "rango",
 		"dano": 2,
 		"cadencia": 0.45,
 		"alcance": 0.0,
-		"sprite_mano": preload("res://sprites/Items/Armas/Arco.png"),
+		"sprite_mano": preload("res://sprites/Items/Tesoros/Kunai.png"),
 		"proyectil": preload("res://sprites/Items/Tesoros/Kunai.png"),
 		"velocidad_proyectil": 260.0,
+		"escala_proyectil": 0.5,
+		"region_proyectil": Rect2(0, 0, 16, 16),
 	},
 	&"vara": {
 		"tipo": "rango",
@@ -52,6 +54,8 @@ const ARMAS := {
 		"sprite_mano": preload("res://sprites/Items/Armas/Vara.png"),
 		"proyectil": preload("res://sprites/Proyectiles/PicoHielo.png"),
 		"velocidad_proyectil": 220.0,
+		"escala_proyectil": 0.5,
+		"region_proyectil": Rect2(0, 0, 18, 10),
 	},
 	&"baston": {
 		"tipo": "rango",
@@ -61,6 +65,8 @@ const ARMAS := {
 		"sprite_mano": preload("res://sprites/Items/Armas/Baston.png"),
 		"proyectil": preload("res://sprites/Proyectiles/BolaEnergia.png"),
 		"velocidad_proyectil": 240.0,
+		"escala_proyectil": 0.5,
+		"region_proyectil": Rect2(0, 0, 16, 16),
 	},
 	&"libro": {
 		"tipo": "rango",
@@ -70,6 +76,8 @@ const ARMAS := {
 		"sprite_mano": preload("res://sprites/Items/Armas/Libro.png"),
 		"proyectil": preload("res://sprites/Proyectiles/BolaFuego.png"),
 		"velocidad_proyectil": 200.0,
+		"escala_proyectil": 0.5,
+		"region_proyectil": Rect2(0, 0, 16, 16),
 	},
 }
 
@@ -112,3 +120,14 @@ static func proyectil(id: StringName) -> Texture2D:
 ## Velocidad del proyectil de un arma a distancia.
 static func velocidad_proyectil(id: StringName) -> float:
 	return float(obtener(id).get("velocidad_proyectil", 240.0))
+
+
+## Escala del proyectil (1.0 si no está en el catálogo).
+static func escala_proyectil(id: StringName) -> float:
+	return float(obtener(id).get("escala_proyectil", 1.0))
+
+
+## Región (fotograma) del proyectil dentro de su tira de animación. Vacío si
+## el proyectil es una imagen única.
+static func region_proyectil(id: StringName) -> Rect2:
+	return obtener(id).get("region_proyectil", Rect2())

@@ -47,10 +47,10 @@ const ITEMS := {
 		"tipo": "arma",
 		"max": 1,
 	},
-	&"arco": {
-		"nombre": "Arco",
-		"icono": preload("res://sprites/Items/Armas/Arco.png"),
-		"descripcion": "Dispara a distancia.",
+	&"kunai": {
+		"nombre": "Kunai",
+		"icono": preload("res://sprites/Items/Tesoros/Kunai.png"),
+		"descripcion": "Arma arrojadiza.",
 		"tipo": "arma",
 		"max": 1,
 	},
