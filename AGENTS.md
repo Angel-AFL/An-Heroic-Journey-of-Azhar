@@ -102,6 +102,23 @@ verify changes by running the game through the `godot_ai` MCP addon.
   (heart HUD via `scripts/hud_corazones.gd`, driven by the `Personaje.vida_cambiada` signal).
   The player exposes `recibir_dano`/`vida_maxima` and reloads the scene on death.
 
+### Jefes de bioma
+
+- Jefes: `scenes/enemigos/jefe.gd` extiende `enemigo.gd` y añade `nombre`, barra de vida,
+  ataque especial de proyectiles en abanico y fase 2 (`umbral_fase`, `multiplicador_fase2`).
+  Escenas: `jefe_bosque.tscn` (Rey Slime), `jefe_desierto.tscn` (Cactus Ancestral),
+  `jefe_nieve.tscn` (Señor del Hielo). El jefe se une a los grupos `enemigos` y `jefe`.
+- Barra de vida de jefe: `BarraJefe` en `scenes/ui/hud.tscn` (`scripts/hud_jefe.gd`, grupo
+  `hud_jefe`, oculta). El jefe la encuentra por grupo en su `_ready` y llama `mostrar(self)`;
+  al morir la oculta. Lee `nombre`/`vida`/`vida_maxima` del jefe y escucha su señal
+  `vida_cambiada`.
+- Aparición por gating: `scripts/controlador_jefe.gd` (Node2D, `escena_jefe`) cuenta los
+  enemigos normales del nodo `Enemigos`, escucha su señal `murio` y, cuando no queda ninguno,
+  instancia al jefe en su propia posición. Se coloca un `ControladorJefe` por bioma
+  (bosque/desierto/nieve), fuera del punto de aparición del jugador.
+- Proyectiles de enemigo: `scripts/proyectil.gd` tiene `de_enemigo`; si es `true` daña al
+  grupo `personaje` y atraviesa a `enemigos` (el jefe lo activa en su ataque especial).
+
 ## Coins / currency
 
 - `scripts/monedero.gd` is the `Monedero` autoload: a global in-memory coin total that

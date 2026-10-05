@@ -11,6 +11,9 @@ extends Area2D
 @export var region: Rect2 = Rect2()
 @export var escala: float = 1.0
 @export var direccion: Vector2 = Vector2.RIGHT
+## Si es true, el proyectil lo dispara un enemigo: daña al Personaje y
+## atraviesa a los enemigos en vez de al revés.
+@export var de_enemigo: bool = false
 
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _timer: Timer = $TimerDuracion
@@ -35,6 +38,13 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if de_enemigo:
+		if body.is_in_group("enemigos"):
+			return
+		if body.is_in_group("personaje") and body.has_method("recibir_dano"):
+			body.recibir_dano(dano)
+		queue_free()
+		return
 	if body.is_in_group("personaje"):
 		return
 	if body.has_method("recibir_dano"):
