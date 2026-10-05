@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://j03eichafyiy" path="res://scenes/enemigos/cactus.tscn" id="4_mjqie"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_5b8jf"]
 [ext_resource type="AudioStream" uid="uid://ddo58i6j8s73w" path="res://audio/desierto.mp3" id="6_5b8jf"]
+[ext_resource type="PackedScene" path="res://scenes/enemigos/jefe_desierto.tscn" id="8_jefe"]
+[ext_resource type="Script" path="res://scripts/controlador_jefe.gd" id="9_ctrl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0l5s8"]
 size = Vector2(24, 59)
@@ -74,6 +76,26 @@ position = Vector2(-120, 40)
 
 [node name="Cactus6" parent="Enemigos" unique_id=1037589099 instance=ExtResource("4_mjqie")]
 position = Vector2(-40, -240)
+
+[node name="Cactus7" parent="Enemigos" instance=ExtResource("4_mjqie")]
+position = Vector2(260, 140)
+
+[node name="Cactus8" parent="Enemigos" instance=ExtResource("4_mjqie")]
+position = Vector2(-320, -80)
+
+[node name="Cactus9" parent="Enemigos" instance=ExtResource("4_mjqie")]
+position = Vector2(60, -140)
+
+[node name="Cactus10" parent="Enemigos" instance=ExtResource("4_mjqie")]
+position = Vector2(300, -120)
+
+[node name="Cactus11" parent="Enemigos" instance=ExtResource("4_mjqie")]
+position = Vector2(-260, 220)
+
+[node name="ControladorJefe" type="Node2D" parent="."]
+position = Vector2(-40, -80)
+script = ExtResource("9_ctrl")
+escena_jefe = ExtResource("8_jefe")
 
 [node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("5_5b8jf")]
 

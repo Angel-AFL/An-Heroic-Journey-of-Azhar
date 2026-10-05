@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b5jddddyvuos3" path="res://scenes/enemigos/flama_invierno.tscn" id="5_1f10p"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="6_cr3dc"]
 [ext_resource type="AudioStream" uid="uid://c2o0qpvxnymng" path="res://audio/nieve.mp3" id="7_cr3dc"]
+[ext_resource type="PackedScene" path="res://scenes/enemigos/jefe_nieve.tscn" id="9_jefe"]
+[ext_resource type="Script" path="res://scripts/controlador_jefe.gd" id="10_ctrl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zona"]
 size = Vector2(138, 32)
@@ -72,6 +74,26 @@ position = Vector2(-40, -260)
 
 [node name="FlamaInvierno6" parent="Enemigos" unique_id=596866356 instance=ExtResource("5_1f10p")]
 position = Vector2(200, 200)
+
+[node name="Flama7" parent="Enemigos" instance=ExtResource("5_1f10p")]
+position = Vector2(-260, -120)
+
+[node name="Flama8" parent="Enemigos" instance=ExtResource("5_1f10p")]
+position = Vector2(260, -60)
+
+[node name="Flama9" parent="Enemigos" instance=ExtResource("5_1f10p")]
+position = Vector2(-80, 140)
+
+[node name="Flama10" parent="Enemigos" instance=ExtResource("5_1f10p")]
+position = Vector2(40, -60)
+
+[node name="Flama11" parent="Enemigos" instance=ExtResource("5_1f10p")]
+position = Vector2(-340, -220)
+
+[node name="ControladorJefe" type="Node2D" parent="."]
+position = Vector2(0, -120)
+script = ExtResource("10_ctrl")
+escena_jefe = ExtResource("9_jefe")
 
 [node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("6_cr3dc")]
 

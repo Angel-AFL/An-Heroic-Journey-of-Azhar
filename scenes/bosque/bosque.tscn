@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dh2v2wlybytuy" path="res://scenes/enemigos/slime.tscn" id="4_djhx6"]
 [ext_resource type="PackedScene" uid="uid://cqd1b4hy7xunh" path="res://scenes/ui/hud.tscn" id="5_ffbyw"]
 [ext_resource type="AudioStream" uid="uid://bes4ymy7tqey" path="res://audio/bosque-soundtrack.wav" id="6_bosm1"]
+[ext_resource type="PackedScene" path="res://scenes/enemigos/jefe_bosque.tscn" id="8_jefe"]
+[ext_resource type="Script" path="res://scripts/controlador_jefe.gd" id="9_ctrl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vifm"]
 size = Vector2(23, 72)
@@ -111,6 +113,26 @@ position = Vector2(-321, 159)
 
 [node name="Slime7" parent="Enemigos" unique_id=2122097113 instance=ExtResource("4_djhx6")]
 position = Vector2(-241, -14)
+
+[node name="Slime8" parent="Enemigos" instance=ExtResource("4_djhx6")]
+position = Vector2(330, 40)
+
+[node name="Slime9" parent="Enemigos" instance=ExtResource("4_djhx6")]
+position = Vector2(-70, 250)
+
+[node name="Slime10" parent="Enemigos" instance=ExtResource("4_djhx6")]
+position = Vector2(-350, -120)
+
+[node name="Slime11" parent="Enemigos" instance=ExtResource("4_djhx6")]
+position = Vector2(200, 250)
+
+[node name="Slime12" parent="Enemigos" instance=ExtResource("4_djhx6")]
+position = Vector2(-150, 40)
+
+[node name="ControladorJefe" type="Node2D" parent="."]
+position = Vector2(-200, -160)
+script = ExtResource("9_ctrl")
+escena_jefe = ExtResource("8_jefe")
 
 [node name="HUD" parent="." unique_id=1744036134 instance=ExtResource("5_ffbyw")]
 

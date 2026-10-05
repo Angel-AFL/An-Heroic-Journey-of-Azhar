@@ -1,0 +1,96 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemigos/jefe.gd" id="1_jefe"]
+[ext_resource type="Texture2D" uid="uid://v54k8u6x65wi" path="res://sprites/Personajes/Enemigos/Enemigo_3.png" id="2_atlas"]
+[ext_resource type="Texture2D" uid="uid://dypcnwa3gqys7" path="res://sprites/Personajes/Enemigos/EnemigoMuerto.png" id="3_muerto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_colision"]
+size = Vector2(42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0"]
+atlas = ExtResource("2_atlas")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("2_atlas")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
+atlas = ExtResource("2_atlas")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3"]
+atlas = ExtResource("2_atlas")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jefe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_contacto"]
+size = Vector2(48, 46)
+
+[node name="JefeNieve" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_jefe")
+vida_maxima = 50
+velocidad = 70.0
+radio_deteccion = 170.0
+dano_contacto = 4
+cadencia_dano = 0.5
+empuje = 300.0
+monedas_al_morir = 30
+persecucion_memoria = 2.0
+embestida_activa = true
+velocidad_embestida = 420.0
+duracion_embestida = 0.4
+cooldown_embestida = 1.8
+preparacion_embestida = 0.35
+dano_embestida = 4
+distancia_embestida = 180.0
+nombre = "Señor del Hielo"
+ataque_especial_cooldown = 3.5
+proyectiles_especial = 12
+dano_especial = 2
+velocidad_proyectil_especial = 190.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_colision")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_jefe")
+autoplay = "default"
+
+[node name="ZonaContacto" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaContacto"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_contacto")
+
+[node name="SpriteMuerte" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_muerto")
+
+[node name="TimerDano" type="Timer" parent="."]
+one_shot = true
