@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bwqfn4nh61g67"]
 
-[ext_resource type="Script" uid="uid://vij7kxck0cst" path="res://scripts/npc_dialogo.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/herrero.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bgb0g2vwi7sns" path="res://sprites/Personajes/NPC/Herrero/SeparateAnim/Idle.png" id="2_idle"]
 [ext_resource type="Resource" uid="uid://ndqpnojmebam" path="res://dialogues/rodrigo_dialogue.dialogue" id="3_dialogo"]
 
