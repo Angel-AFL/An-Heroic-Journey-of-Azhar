@@ -105,7 +105,3 @@ position = Vector2(3, 116)
 [node name="ItemPocionVida" parent="." unique_id=562508635 instance=ExtResource("14_py8k1")]
 position = Vector2(80, -82)
 item_id = &"pocion_vida"
-
-[node name="ItemEspada" parent="." unique_id=171344589 instance=ExtResource("14_py8k1")]
-position = Vector2(-80, -82)
-item_id = &"espada"

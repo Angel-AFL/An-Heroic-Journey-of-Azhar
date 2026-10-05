@@ -11,17 +11,22 @@ const CatalogoItems = preload("res://scripts/catalogo_items.gd")
 @export var precios: Array[int] = [10, 30, 50]
 @export var precios_items: Dictionary = {
 	"pocion_vida": 15,
-	"espada": 40,
 }
 
 
 func _ready() -> void:
 	super._ready()
-	DialogueManager.register_state_context("Comerciante", self)
+	DialogueManager.register_state_context(_alias_contexto(), self)
 
 
 func _exit_tree() -> void:
-	DialogueManager.unregister_state_context("Comerciante")
+	DialogueManager.unregister_state_context(_alias_contexto())
+
+
+## Alias con el que el diálogo accede a este comerciante. Las clases hijas
+## (p. ej. el herrero) pueden sobrescribirlo.
+func _alias_contexto() -> String:
+	return "Comerciante"
 
 
 func al_maximo() -> bool:

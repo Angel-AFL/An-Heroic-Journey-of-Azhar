@@ -9,6 +9,8 @@ signal murio
 const MejorasTipo = preload("res://scripts/mejoras.gd")
 const SonidoTipo = preload("res://scripts/sonido.gd")
 const EquipoTipo = preload("res://scripts/equipo.gd")
+const CatalogoArmas = preload("res://scripts/catalogo_armas.gd")
+const ESCENA_PROYECTIL: PackedScene = preload("res://scenes/proyectiles/proyectil.tscn")
 const SONIDO_ATAQUE: AudioStream = preload("res://audio/ataque.wav")
 const SONIDO_GOLPE_ENEMIGO: AudioStream = preload("res://audio/golpe-enemigo.wav")
 
@@ -16,7 +18,6 @@ const SONIDO_GOLPE_ENEMIGO: AudioStream = preload("res://audio/golpe-enemigo.wav
 @export var attack_duration: float = 0.3
 @export var vida_maxima: int = 3
 @export var dano_ataque: int = 1
-@export var dano_espada: int = 2
 @export var invulnerabilidad: float = 0.8
 @export var alcance_ataque: float = 22.0
 
@@ -26,13 +27,13 @@ var direccion: Vector2 = Vector2.DOWN
 var vida: int = 0
 var _invulnerable: bool = false
 var _golpeados: Array = []
-var _espada_equipada: bool = false
+var _arma_id: StringName = &""
 
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _attack_timer: Timer = $AttackTimer
 @onready var _hitbox: Area2D = $Hitbox
 @onready var _inv_timer: Timer = $InvulnerabilidadTimer
-@onready var _espada: Sprite2D = $Espada
+@onready var _arma: Sprite2D = $Arma
 @onready var _mejoras: MejorasTipo = get_node("/root/Mejoras") as MejorasTipo
 @onready var _sonido: SonidoTipo = get_node("/root/Sonido") as SonidoTipo
 @onready var _equipo: EquipoTipo = get_node("/root/Equipo") as EquipoTipo
@@ -51,7 +52,7 @@ func _ready() -> void:
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	_mejoras.cambiado.connect(sincronizar_vida_maxima)
-	_espada_equipada = _equipo.esta_equipada(&"espada")
+	_arma_id = _equipo.arma_equipada()
 	_equipo.arma_cambiada.connect(_on_arma_cambiada)
 	vida_cambiada.emit(vida, vida_maxima)
 
@@ -94,10 +95,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			direccion = input_dir
 
 		_sprite.play("atacar-" + _dir_name(direccion))
+		_attack_timer.wait_time = _cadencia_actual()
 		_attack_timer.start()
-		_activar_hitbox()
-		if _espada_equipada:
-			_empunar_espada()
+		if _tipo_arma() == "rango":
+			_disparar_proyectil()
+		else:
+			_activar_hitbox()
+			if _arma_id != &"":
+				_empunar_arma()
 
 
 func _activar_hitbox() -> void:
@@ -109,25 +114,46 @@ func _activar_hitbox() -> void:
 		_golpear_en_hitbox()
 
 
-func _empunar_espada() -> void:
-	_espada.visible = true
+func _empunar_arma() -> void:
+	var textura := CatalogoArmas.sprite_mano(_arma_id)
+	if textura != null:
+		_arma.texture = textura
+	_arma.visible = true
 	match _dir_name(direccion):
 		"derecha":
-			_espada.position = Vector2(9, 4)
-			_espada.rotation = PI / 2.0
+			_arma.position = Vector2(9, 4)
+			_arma.rotation = PI / 2.0
 		"izquierda":
-			_espada.position = Vector2(-12, 5)
-			_espada.rotation = -PI / 2.0
+			_arma.position = Vector2(-12, 5)
+			_arma.rotation = -PI / 2.0
 		"arriba":
-			_espada.position = Vector2(0, -9)
-			_espada.rotation = 0.0
+			_arma.position = Vector2(0, -9)
+			_arma.rotation = 0.0
 		_:
-			_espada.position = Vector2(0, 9)
-			_espada.rotation = PI
+			_arma.position = Vector2(0, 9)
+			_arma.rotation = PI
 
 
-func _guardar_espada() -> void:
-	_espada.visible = false
+func _guardar_arma() -> void:
+	_arma.visible = false
+
+
+func _disparar_proyectil() -> void:
+	var textura := CatalogoArmas.proyectil(_arma_id)
+	if textura == null:
+		return
+	var escena := get_tree().current_scene
+	if escena == null:
+		return
+	var proyectil := ESCENA_PROYECTIL.instantiate()
+	proyectil.dano = _dano_arma()
+	proyectil.textura = textura
+	proyectil.region = CatalogoArmas.region_proyectil(_arma_id)
+	proyectil.escala = CatalogoArmas.escala_proyectil(_arma_id)
+	proyectil.velocidad = CatalogoArmas.velocidad_proyectil(_arma_id)
+	proyectil.direccion = direccion.normalized()
+	escena.add_child(proyectil)
+	proyectil.global_position = global_position + direccion.normalized() * 10.0
 
 
 func _golpear_en_hitbox() -> void:
@@ -146,12 +172,11 @@ func _aplicar_golpe(cuerpo: Node) -> void:
 		return
 	if not cuerpo.has_method("recibir_dano"):
 		return
-	if not (cuerpo is Node2D) or global_position.distance_to(cuerpo.global_position) > alcance_ataque:
+	if not (cuerpo is Node2D) or global_position.distance_to(cuerpo.global_position) > _alcance_actual():
 		return
 	_golpeados.append(cuerpo)
 	_sonido.reproducir(SONIDO_ATAQUE)
-	var dano := dano_espada if _espada_equipada else dano_ataque
-	cuerpo.recibir_dano(dano)
+	cuerpo.recibir_dano(_dano_arma())
 
 
 func recibir_dano(cantidad: int) -> void:
@@ -185,9 +210,24 @@ func curar(cantidad: int) -> bool:
 
 
 func _on_arma_cambiada(id: StringName) -> void:
-	_espada_equipada = id == &"espada"
-	if not _espada_equipada:
-		_guardar_espada()
+	_arma_id = id
+	_guardar_arma()
+
+
+func _tipo_arma() -> String:
+	return CatalogoArmas.tipo(_arma_id)
+
+
+func _dano_arma() -> int:
+	return CatalogoArmas.dano(_arma_id, dano_ataque)
+
+
+func _cadencia_actual() -> float:
+	return CatalogoArmas.cadencia(_arma_id, attack_duration)
+
+
+func _alcance_actual() -> float:
+	return CatalogoArmas.alcance(_arma_id, alcance_ataque)
 
 
 func _morir() -> void:
@@ -195,7 +235,7 @@ func _morir() -> void:
 	puede_moverse = false
 	atacando = false
 	_hitbox.monitoring = false
-	_guardar_espada()
+	_guardar_arma()
 	_sprite.modulate.a = 1.0
 	_mejoras.reiniciar_vida()
 	await get_tree().create_timer(0.6).timeout
@@ -217,20 +257,21 @@ func _on_invulnerabilidad_fin() -> void:
 func _on_attack_finished() -> void:
 	atacando = false
 	_hitbox.monitoring = false
-	_guardar_espada()
+	_guardar_arma()
 	_play_idle()
 
 
 func _offset_hitbox() -> Vector2:
+	var dist := 8.0 * (_alcance_actual() / maxf(alcance_ataque, 1.0))
 	match _dir_name(direccion):
 		"derecha":
-			return Vector2(8, 0)
+			return Vector2(dist, 0)
 		"izquierda":
-			return Vector2(-8, 0)
+			return Vector2(-dist, 0)
 		"arriba":
-			return Vector2(0, -8)
+			return Vector2(0, -dist)
 		_:
-			return Vector2(0, 8)
+			return Vector2(0, dist)
 
 
 func _play_idle() -> void:

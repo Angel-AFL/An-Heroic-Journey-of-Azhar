@@ -30,13 +30,6 @@ Joel: ¿En qué puedo ayudarte?
 		else:
 			Joel: Te falta oro para eso, amigo.
 		=> start
-	- Espada oxidada ({{Comerciante.precio_item("espada")}} monedas).
-		if Comerciante.puede_comprar_item("espada"):
-			do Comerciante.comprar_item("espada")
-			Joel: Cuídala bien, forastero.
-		else:
-			Joel: Te falta oro para eso, amigo.
-		=> start
 	- Ahora no.
 		=> start
 - ¿Qué se sabe del mundo exterior?

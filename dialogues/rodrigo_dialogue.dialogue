@@ -3,13 +3,70 @@ Rodrigo: ¡Bienvenido a mi herrería, forastero!
 Rodrigo: Soy Rodrigo, el herrero de la villa. Si algo se rompe, aquí se arregla.
 Rodrigo: ¿Necesitas algo?
 
+- ¿Puedes venderme un arma?
+	Rodrigo: Claro, mira lo que tengo en la fragua.
+	Rodrigo: ¿Cuál te llevas?
+	- Hueso afilado ({{Herrero.precio_item("hueso")}} monedas).
+		if Herrero.puede_comprar_item("hueso"):
+			do Herrero.comprar_item("hueso")
+			Rodrigo: Ligero y rápido. No te fíes de su aspecto.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Espada oxidada ({{Herrero.precio_item("espada")}} monedas).
+		if Herrero.puede_comprar_item("espada"):
+			do Herrero.comprar_item("espada")
+			Rodrigo: Cuídala bien, forastero.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Tridente ({{Herrero.precio_item("tridente")}} monedas).
+		if Herrero.puede_comprar_item("tridente"):
+			do Herrero.comprar_item("tridente")
+			Rodrigo: Alcanza más lejos que cualquier espada.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Mazo pesado ({{Herrero.precio_item("mazo")}} monedas).
+		if Herrero.puede_comprar_item("mazo"):
+			do Herrero.comprar_item("mazo")
+			Rodrigo: Pesa lo suyo, pero parte piedras.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Kunai ({{Herrero.precio_item("kunai")}} monedas).
+		if Herrero.puede_comprar_item("kunai"):
+			do Herrero.comprar_item("kunai")
+			Rodrigo: Se lanza desde lejos. Tú verás.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Vara de hielo ({{Herrero.precio_item("vara")}} monedas).
+		if Herrero.puede_comprar_item("vara"):
+			do Herrero.comprar_item("vara")
+			Rodrigo: Fría al tacto. Lanza púas de hielo.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Bastón arcano ({{Herrero.precio_item("baston")}} monedas).
+		if Herrero.puede_comprar_item("baston"):
+			do Herrero.comprar_item("baston")
+			Rodrigo: No lo forjé yo, pero funciona.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Libro de fuego ({{Herrero.precio_item("libro")}} monedas).
+		if Herrero.puede_comprar_item("libro"):
+			do Herrero.comprar_item("libro")
+			Rodrigo: Magia de verdad. Ten cuidado.
+		else:
+			Rodrigo: Te falta oro para eso, amigo.
+		=> start
+	- Ahora no.
+		=> start
 - ¿Qué forjas aquí?
 	Rodrigo: De todo: azadas, ollas, herraduras... y alguna que otra espada.
 	Rodrigo: Un buen acero aguanta más que la mejor armadura, ¿sabes?
-	=> start
-- ¿Puedes venderme un arma?
-	Rodrigo: Je, todavía no. Mi mejor espada sigue en la fragua.
-	Rodrigo: Vuelve cuando esté lista y hablamos.
 	=> start
 - ¿Conoces el mundo exterior?
 	Rodrigo: De oídas. Los viajeros traen hierro del desierto y pieles de la nieve.
