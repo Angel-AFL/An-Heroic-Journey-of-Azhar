@@ -172,7 +172,7 @@ func _aplicar_golpe(cuerpo: Node) -> void:
 		return
 	if not cuerpo.has_method("recibir_dano"):
 		return
-	if not (cuerpo is Node2D) or global_position.distance_to(cuerpo.global_position) > _alcance_actual():
+	if not (cuerpo is Node2D) or global_position.distance_to(cuerpo.global_position) > _alcance_actual() + _radio_objetivo(cuerpo):
 		return
 	_golpeados.append(cuerpo)
 	_sonido.reproducir(SONIDO_ATAQUE)
@@ -216,6 +216,11 @@ func _on_arma_cambiada(id: StringName) -> void:
 
 func _tipo_arma() -> String:
 	return CatalogoArmas.tipo(_arma_id)
+
+
+func _radio_objetivo(cuerpo: Node) -> float:
+	var radio = cuerpo.get("radio_golpe")
+	return float(radio) if radio != null else 0.0
 
 
 func _dano_arma() -> int:
