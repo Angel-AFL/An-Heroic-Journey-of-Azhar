@@ -16,6 +16,10 @@ enum Estado { NORMAL, PREPARACION, EMBESTIDA }
 @export var cadencia_dano: float = 0.55
 @export var empuje: float = 150.0
 @export var duracion_empuje: float = 0.2
+## Radio extra (px) que el jugador suma a su alcance melee al golpear a este
+## enemigo. Útil en enemigos grandes (p. ej. jefes) para que el cuerpo a cuerpo
+## conecte. 0 = sin efecto.
+@export var radio_golpe: float = 0.0
 @export var monedas_al_morir: int = 1
 @export var escena_moneda: PackedScene = preload("res://scenes/items/moneda.tscn")
 @export var items_al_morir: Array[StringName] = []
