@@ -130,7 +130,7 @@ position = Vector2(200, 250)
 position = Vector2(-150, 40)
 
 [node name="ControladorJefe" type="Node2D" parent="."]
-position = Vector2(-200, -160)
+position = Vector2(0, 0)
 script = ExtResource("9_ctrl")
 escena_jefe = ExtResource("8_jefe")
 
