@@ -5,10 +5,10 @@ verify changes by running the game through the `godot_ai` MCP addon.
 
 ## Running / verifying
 
-- Main scene (`project.godot` `run/main_scene`) is `res://scenes/prueba_fisicas/prueba_fisicas.tscn`,
-  a physics sandbox — **not** a playable level. To test gameplay run a level instead:
+- Main scene (`project.godot` `run/main_scene`) is `res://scenes/ui/menu_inicio.tscn` (start
+  menu). To test gameplay run a level instead:
   `project_run(mode="custom", scene="res://scenes/villa/villa.tscn")`.
-  Levels: `scenes/{villa,bosque,desierto,nieve}/*.tscn`.
+  Levels: `scenes/{villa,bosque,desierto,nieve,santuario}/*.tscn`.
 - There are no unit tests. Verify at runtime with `game_eval` (GDScript in the running
   game), `game_manage` (`get_node_info`, `input_sequence`, `input_action`), and `logs_read`.
 - Simulating input: `_unhandled_input`/`_input` handlers only react to real events
@@ -37,7 +37,9 @@ verify changes by running the game through the `godot_ai` MCP addon.
 
 - Autoloads (`project.godot`): `Transicion` (scene fades), `Monedero` (global coin
   total), `Mejoras` (permanent upgrades: extra max hearts), `Sonido` (SFX pool, see Audio
-  below), `DialogueManager` (dialogue_manager addon), `_mcp_game_helper` (godot_ai addon).
+  below), `Inventario` (global inventory), `Equipo` (equipped weapon),
+  `Dev` (developer shortcuts, see Modo desarrollador), `PantallaMuerte` (death screen),
+  `DialogueManager` (dialogue_manager addon), `_mcp_game_helper` (godot_ai addon).
 - Every level instances `res://scenes/personaje/personaje.tscn` as a node named exactly
   `Personaje`. `scripts/transicion.gd` repositions the node found by that literal name, and
   `scripts/zona_transicion.gd` triggers on group `personaje` — preserve both when editing levels.
@@ -170,7 +172,91 @@ verify changes by running the game through the `godot_ai` MCP addon.
 - Animation names are directional: `caminar-<dir>`, `idle-<dir>`, `atacar-<dir>` where `<dir>`
   is `arriba|abajo|izquierda|derecha`. `atacar-*` are single-frame poses held for
   `attack_duration`. The old non-directional `idle`/`atacar` no longer exist.
+- `muerto` is a single-frame death pose from `sprites/Personajes/GreenNinja/Dead.png`; se
+  reproduce en `personaje.gd:_morir()` antes de abrir `PantallaMuerte`.
 - Adding/renaming animations means editing the `.tres` (in the editor) **and** updating
   `personaje.gd`; keep them in sync.
 - Custom input actions (in `project.godot`): `mover_arriba/abajo/izquierda/derecha`,
-  `interactuar` (E), `atacar` (Space + left mouse).
+  `interactuar` (E), `atacar` (Space + left mouse), `dev_farmear_monedas` (P).
+
+## Modo desarrollador
+
+- `scripts/dev.gd` es el autoload `Dev`: atajos de testeo, activos solo con
+  `OS.is_debug_build()` y en niveles (requiere el grupo `personaje`, no funciona en pausa
+  ni en el menú).
+- **Farmeo de monedas:** pulsar **P** suma `MONEDAS_POR_PULSACION` (100) al `Monedero`,
+  acumulativamente, y suena `res://audio/moneda.wav`.
+- **Para desactivarlo**, cambia `FARMEO_MONEDAS_ACTIVO` a `false` en `scripts/dev.gd`.
+  **Para reactivarlo**, vuelve a ponerlo en `true`. Ese es el único cambio necesario.
+
+## Cinemática de introducción
+
+- `scenes/ui/cinematica_intro.tscn` + `scripts/cinematica_intro.gd`: cinemática de diapositivas
+  automáticas que se reproduce al pulsar **Jugar** en el menú, después de reiniciar la partida.
+- Usa el arte del menú (`menu-inicio.jpg`), retratos de `Narrador`, `Anciano` y `Azhar`,
+  siluetas de enemigos y tintes de color. La música es `menu-inicio.mp3` en bucle.
+- Avanza sola, se puede adelantar con **E** o clic y saltar con **Esc** o el botón
+  “Saltar (Esc)”. Al terminar entra al bosque en `PuntosEntrada/DesdeMenu`.
+- No se reproduce al usar **Seguir jugando** tras morir. El menú (`scripts/menu_inicio.gd`)
+  ahora transiciona a `cinematica_intro.tscn` en lugar de ir directo al bosque.
+- **Victoria:** el mismo script (`es_victoria = true`) y `scenes/ui/cinematica_victoria.tscn`
+  reproducen el cierre tras derrotar al jefe final. Usan tintes dorados y las tres piedras
+  ancestrales como motivo; al terminar o saltar vuelven al menú de inicio. El trigger del
+  jefe (`scripts/trigger_jefe_final.gd`) conecta su señal `murio`, espera 1,2 s y comprueba
+  que el jugador siga vivo antes de lanzarla.
+
+## Pantalla de muerte
+
+- `scenes/ui/pantalla_muerte.tscn` + `scripts/pantalla_muerte.gd` es el autoload
+  `PantallaMuerte` (CanvasLayer 200, `PROCESS_MODE_ALWAYS`). Se muestra desde
+  `personaje.gd:_morir()` tras la animación `muerto`.
+- Pausa el juego y muestra el panel de muerte con el estilo de diálogo del juego
+  (`DialogueBoxSimple.png` / `ChoiceBox.png`), título “HAS MUERTO” y dos botones:
+  **Seguir jugando** y **Salir**.
+- **Seguir jugando:** despausa, restaura la vida con `Mejoras.reiniciar_vida()` y vuelve al
+  bosque en `PuntosEntrada/DesdeMenu`; conserva monedas, inventario, equipo y mejoras.
+- **Salir:** despausa y vuelve al menú de inicio. El botón de continuar recibe el foco.
+
+## Puerta ancestral / Santuario
+
+- **Piedras de jefe:** `piedra_bosque`, `piedra_desierto` y `piedra_nieve` son objetos únicos
+  (`max = 1`, `tipo = "clave"`). Los jefes de bioma las sueltan con `items_al_morir`; la hotbar
+  oculta los objetos `"clave"`, pero se ven en el panel de inventario. No se consumen.
+- **Puerta:** `scenes/puerta/puerta_ancestral.tscn` + `scripts/puerta_ancestral.gd`, instanciada
+  en el fondo del camino central del bosque (≈`(168, 280)`). Es una puerta cenital de 64×32
+  con dos hojas que se deslizan. Con `interactuar` comprueba las tres piedras y abre el
+  diálogo `dialogues/puerta_ancestral.dialogue` (cues `cerrada` / `abierta`): si faltan,
+  “Debes introducir las piedras ancestrales para abrir la puerta.”; si están, enciende los
+  engastes, abre las hojas y muestra “Has introducido las piedras ancestrales, abriendo la
+  puerta.” Al abrirse desactiva su `Bloqueo`, habilita `ZonaPaso` y el jugador cruza al
+  Santuario. La puerta no consume las piedras.
+- **Diálogos y retratos:** `dialogues/puerta_ancestral.dialogue` y
+  `dialogues/guardian_eclipse.dialogue` usan el balloon normal de DialogueManager, con
+  retratos `sprites/UI/Retratos/PuertaAncestral.svg` y `GuardianEclipse.svg` añadidos al mapa
+  `RETRATOS` de `scripts/dialogue_balloon.gd`.
+- **Santuario:** `scenes/santuario/santuario.tscn`, nivel final oscuro con tres zonas de bioma
+  (bosque al oeste, desierto al este, nieve al norte) alrededor de una plaza central. Usa
+  `CanvasModulate`, viñeta (`shaders/vineta.gdshader`), columnas con `PointLight2D` y
+  `AltarAncestral.svg`. La música `jefe-final.mp3` está en bucle a volumen -6 dB.
+- **Entradas:** `PuntosEntrada/DesdeBosque` en el Santuario y `PuntosEntrada/DesdeSantuario`
+  en el bosque (delante de la puerta). La zona de vuelta está al fondo sur del Santuario.
+- **Aparición del jefe:** `scripts/trigger_jefe_final.gd` en el `Area2D` de la plaza muestra
+  `dialogues/guardian_eclipse.dialogue` (“El Guardián del Eclipse ha despertado.”) y, al
+  cerrarse el diálogo, instancia `scenes/enemigos/jefe_final.tscn` en `PuntosJefe` con un
+  destello morado.
+
+## Jefe final
+
+- `scenes/enemigos/jefe_final.gd` extiende `jefe.gd`; escena `jefe_final.tscn`. Nombre
+  “Guardián del Eclipse”, 140 de vida, daño de contacto 3, embestida 4 y proyectiles 2.
+- **Aspecto:** sprite propio `sprites/Personajes/Enemigos/GuardianEclipse.svg` (guardián de
+  piedra con halo de eclipse y grietas verde/ámbar/celeste), aura pulsante y tres orbes de
+  piedra orbitando. La muerte usa `GuardianEclipseMuerto.svg`.
+- **Ataques:** embestida telegrafiada (`embestida_activa`), abanico de 12 proyectiles que alterna
+  `PicoHierba.png` y `PicoHielo.png`, y una invocación cada 8 s (6 s en fase 2).
+- **Invocaciones:** 2 esbirros por tanda, rotando slime → cactus → flama, máximo 5 vivos. Se
+  debilitan al instanciarlos (2 de vida, 1 de daño, velocidad 60, sin monedas) y se añaden al
+  grupo `invocados_eclipse`; al morir el jefe se liberan. Los ataques no se solapan: la lluvia
+  y la invocación solo empiezan si el jefe está en estado normal y no está cargando.
+- **Fase 2:** al 50% de vida, `jefe.gd` acelera el jefe y sus ataques especiales; la invocación
+  pasa a 6 s. Al morir suelta 100 monedas (pickups, no directas al Monedero).

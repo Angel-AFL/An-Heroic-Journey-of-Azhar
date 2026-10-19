@@ -7,6 +7,10 @@ extends CharacterBody2D
 
 signal murio
 
+const CatalogoItems = preload("res://scripts/catalogo_items.gd")
+const InventarioTipo = preload("res://scripts/inventario.gd")
+const EquipoTipo = preload("res://scripts/equipo.gd")
+
 enum Estado { NORMAL, PREPARACION, EMBESTIDA }
 
 @export var vida_maxima: int = 5
@@ -258,7 +262,14 @@ func _soltar_items() -> void:
 	var escena := get_tree().current_scene
 	if escena == null:
 		return
+	var inventario := get_node_or_null("/root/Inventario") as InventarioTipo
+	var equipo := get_node_or_null("/root/Equipo") as EquipoTipo
 	for id in items_al_morir:
+		if CatalogoItems.maximo(id) == 1:
+			if inventario != null and inventario.tiene(id):
+				continue
+			if equipo != null and equipo.esta_equipada(id):
+				continue
 		var item := escena_item.instantiate() as Node2D
 		item.item_id = id
 		item.position = global_position + Vector2(randf_range(-6.0, 6.0), randf_range(-6.0, 6.0))

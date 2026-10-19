@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dn7pw6ioypl0d" path="res://sprites/Personajes/GreenNinja/GreenNinja_Caminar_Derecha.png" id="3_f27s7"]
 [ext_resource type="Texture2D" uid="uid://bnqmco20kfoif" path="res://sprites/Personajes/GreenNinja/GreenNinja_Caminar_IZquierda.png" id="4_gc0me"]
 [ext_resource type="Texture2D" uid="uid://tn0185u8khke" path="res://sprites/Personajes/GreenNinja/Idle.png" id="5_vka6j"]
+[ext_resource type="Texture2D" path="res://sprites/Personajes/GreenNinja/Dead.png" id="6_dead"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f27s7"]
 atlas = ExtResource("1_34vdl")
@@ -102,6 +103,10 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5kjwt"]
 atlas = ExtResource("5_vka6j")
 region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muerto"]
+atlas = ExtResource("6_dead")
+region = Rect2(0, 0, 16, 16)
 
 [resource]
 animations = [{
@@ -236,4 +241,12 @@ animations = [{
 "loop": 1,
 "name": &"idle-izquierda",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muerto")
+}],
+"loop": 0,
+"name": &"muerto",
+"speed": 1.0
 }]

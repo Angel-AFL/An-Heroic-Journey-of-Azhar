@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/jefe-final.mp3-1b87309091405b13088edbcda9c607
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

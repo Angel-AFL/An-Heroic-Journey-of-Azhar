@@ -58,6 +58,7 @@ dano_contacto = 4
 cadencia_dano = 0.8
 empuje = 320.0
 monedas_al_morir = 30
+items_al_morir = Array[StringName]([&"piedra_desierto"])
 nombre = "Cactus Ancestral"
 radio_golpe = 22.0
 ataque_especial_cooldown = 3.0

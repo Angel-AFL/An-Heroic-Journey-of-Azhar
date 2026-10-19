@@ -58,6 +58,7 @@ dano_contacto = 4
 cadencia_dano = 0.5
 empuje = 300.0
 monedas_al_morir = 30
+items_al_morir = Array[StringName]([&"piedra_nieve"])
 persecucion_memoria = 2.0
 embestida_activa = true
 velocidad_embestida = 420.0

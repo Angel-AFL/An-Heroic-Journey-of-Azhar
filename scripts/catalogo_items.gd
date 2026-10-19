@@ -87,6 +87,27 @@ const ITEMS := {
 		"descripcion": "Abre algo importante.",
 		"tipo": "material",
 	},
+	&"piedra_bosque": {
+		"nombre": "Piedra del Bosque",
+		"icono": preload("res://sprites/Items/Tesoros/PiedraBosque.svg"),
+		"descripcion": "Reliquia que dejó el Rey Slime.",
+		"tipo": "clave",
+		"max": 1,
+	},
+	&"piedra_desierto": {
+		"nombre": "Piedra del Desierto",
+		"icono": preload("res://sprites/Items/Tesoros/PiedraDesierto.svg"),
+		"descripcion": "Reliquia que dejó el Cactus Ancestral.",
+		"tipo": "clave",
+		"max": 1,
+	},
+	&"piedra_nieve": {
+		"nombre": "Piedra del Hielo",
+		"icono": preload("res://sprites/Items/Tesoros/PiedraNieve.svg"),
+		"descripcion": "Reliquia que dejó el Señor del Hielo.",
+		"tipo": "clave",
+		"max": 1,
+	},
 	&"miel": {
 		"nombre": "Tarro de miel",
 		"icono": preload("res://sprites/Items/Ingredientes/Miel.png"),

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dwcq2ck766wbm"
+path="res://.godot/imported/guardian_eclipse.dialogue-5a5d5795510e08c4e4c31975e6dab20d.tres"
+
+[deps]
+
+source_file="res://dialogues/guardian_eclipse.dialogue"
+dest_files=["res://.godot/imported/guardian_eclipse.dialogue-5a5d5795510e08c4e4c31975e6dab20d.tres"]
+
+[params]
+
+defaults=true
