@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/puerta_ancestral.gd" id="1_puerta"]
+[ext_resource type="Texture2D" path="res://sprites/Mapa/PuertaMarcoTop.svg" id="2_marco"]
+[ext_resource type="Texture2D" path="res://sprites/Mapa/PuertaHojaTop.svg" id="3_hoja"]
+[ext_resource type="Texture2D" path="res://sprites/Items/Tesoros/PiedraBosque.svg" id="4_bosque"]
+[ext_resource type="Texture2D" path="res://sprites/Items/Tesoros/PiedraDesierto.svg" id="5_desierto"]
+[ext_resource type="Texture2D" path="res://sprites/Items/Tesoros/PiedraNieve.svg" id="6_nieve"]
+[ext_resource type="Script" path="res://scripts/zona_transicion.gd" id="7_transicion"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bloqueo"]
+size = Vector2(48, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interaccion"]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_paso"]
+size = Vector2(48, 20)
+
+[node name="PuertaAncestral" type="Node2D"]
+z_index = 0
+script = ExtResource("1_puerta")
+escena_destino = "res://scenes/santuario/santuario.tscn"
+punto_entrada = &"PuntosEntrada/DesdeBosque"
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Marco" type="Sprite2D" parent="Visual"]
+texture = ExtResource("2_marco")
+
+[node name="HojaIzquierda" type="Sprite2D" parent="Visual"]
+position = Vector2(-12, 1)
+texture = ExtResource("3_hoja")
+
+[node name="HojaDerecha" type="Sprite2D" parent="Visual"]
+position = Vector2(12, 1)
+flip_h = true
+texture = ExtResource("3_hoja")
+
+[node name="PiedraBosque" type="Sprite2D" parent="Visual"]
+position = Vector2(-12, -11)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_bosque")
+
+[node name="PiedraDesierto" type="Sprite2D" parent="Visual"]
+position = Vector2(0, -11)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_desierto")
+
+[node name="PiedraNieve" type="Sprite2D" parent="Visual"]
+position = Vector2(12, -11)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_nieve")
+
+[node name="Etiqueta" type="Label" parent="."]
+z_index = 3
+position = Vector2(-5, -40)
+visible = false
+theme_override_colors/font_color = Color(1, 0.93, 0.66, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "E"
+
+[node name="Bloqueo" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bloqueo"]
+shape = SubResource("RectangleShape2D_bloqueo")
+
+[node name="ZonaInteraccion" type="Area2D" parent="."]
+position = Vector2(0, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion"]
+shape = SubResource("CircleShape2D_interaccion")
+
+[node name="ZonaPaso" type="Area2D" parent="."]
+position = Vector2(0, 14)
+monitoring = false
+script = ExtResource("7_transicion")
+escena_destino = "res://scenes/santuario/santuario.tscn"
+punto_entrada = &"PuntosEntrada/DesdeBosque"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaPaso"]
+shape = SubResource("RectangleShape2D_paso")

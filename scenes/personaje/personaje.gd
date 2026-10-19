@@ -241,10 +241,24 @@ func _morir() -> void:
 	atacando = false
 	_hitbox.monitoring = false
 	_guardar_arma()
-	_sprite.modulate.a = 1.0
-	_mejoras.reiniciar_vida()
-	await get_tree().create_timer(0.6).timeout
-	get_tree().reload_current_scene()
+	_sprite.modulate = Color.WHITE
+	_sprite.play("muerto")
+	set_deferred("collision_layer", 0)
+	set_deferred("collision_mask", 0)
+	set_physics_process(false)
+
+	var tween := create_tween()
+	tween.tween_property(_sprite, "modulate", Color(1.0, 0.45, 0.45, 1.0), 0.18)
+	tween.parallel().tween_property(_sprite, "rotation", deg_to_rad(-8.0), 0.45)
+	tween.tween_property(_sprite, "modulate:a", 0.0, 0.5)
+	await tween.finished
+
+	var pantalla := get_node_or_null("/root/PantallaMuerte")
+	if pantalla != null and pantalla.has_method("mostrar"):
+		pantalla.mostrar()
+	else:
+		_mejoras.reiniciar_vida()
+		get_tree().reload_current_scene()
 
 
 func _parpadear() -> void:

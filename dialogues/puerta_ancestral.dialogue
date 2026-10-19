@@ -1,0 +1,7 @@
+~ cerrada
+Puerta Ancestral: Debes introducir las piedras ancestrales para abrir la puerta.
+=> END
+
+~ abierta
+Puerta Ancestral: Has introducido las piedras ancestrales, abriendo la puerta.
+=> END

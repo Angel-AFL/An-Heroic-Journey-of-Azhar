@@ -1,0 +1,122 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scenes/enemigos/jefe_final.gd" id="1_jefe"]
+[ext_resource type="Texture2D" path="res://sprites/Personajes/Enemigos/GuardianEclipse.svg" id="2_guardián"]
+[ext_resource type="Texture2D" path="res://sprites/Personajes/Enemigos/GuardianEclipseMuerto.svg" id="3_muerto"]
+[ext_resource type="Texture2D" path="res://sprites/Mapa/LuzSuave.svg" id="4_luz"]
+[ext_resource type="Texture2D" path="res://sprites/Items/Tesoros/PiedraBosque.svg" id="5_bosque"]
+[ext_resource type="Texture2D" path="res://sprites/Items/Tesoros/PiedraDesierto.svg" id="6_desierto"]
+[ext_resource type="Texture2D" path="res://sprites/Items/Tesoros/PiedraNieve.svg" id="7_nieve"]
+[ext_resource type="Texture2D" path="res://sprites/Proyectiles/PicoHierba.png" id="8_hierba"]
+[ext_resource type="Texture2D" path="res://sprites/Proyectiles/PicoHielo.png" id="9_hielo"]
+[ext_resource type="AudioStream" path="res://audio/ataque.wav" id="10_ataque"]
+[ext_resource type="PackedScene" path="res://scenes/proyectiles/proyectil.tscn" id="11_proyectil"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_colision"]
+size = Vector2(60, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_contacto"]
+size = Vector2(64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0"]
+atlas = ExtResource("2_guardián")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jefe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="JefeFinal" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_jefe")
+vida_maxima = 140
+velocidad = 65.0
+radio_deteccion = 260.0
+dano_contacto = 3
+cadencia_dano = 0.7
+empuje = 40.0
+monedas_al_morir = 100
+persecucion_memoria = 2.0
+embestida_activa = true
+velocidad_embestida = 360.0
+duracion_embestida = 0.45
+cooldown_embestida = 3.5
+preparacion_embestida = 0.45
+dano_embestida = 4
+distancia_embestida = 240.0
+nombre = "Guardián del Eclipse"
+radio_golpe = 30.0
+ataque_especial_activo = true
+ataque_especial_cooldown = 3.2
+preparacion_especial = 0.5
+proyectiles_especial = 12
+dano_especial = 2
+velocidad_proyectil_especial = 180.0
+duracion_proyectil_especial = 4.0
+umbral_fase = 0.5
+multiplicador_fase2 = 1.35
+escena_proyectil = ExtResource("11_proyectil")
+textura_proyectil = ExtResource("8_hierba")
+region_proyectil = Rect2(0, 0, 24, 20)
+escala_proyectil = 1.0
+textura_proyectil_alterna = ExtResource("9_hielo")
+region_proyectil_alterna = Rect2(0, 0, 18, 10)
+escala_proyectil_alterna = 1.0
+color_ataque = Color(0.7, 0.5, 1, 1)
+sonido_ataque = ExtResource("10_ataque")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_colision")
+
+[node name="Aura" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+modulate = Color(0.55, 0.3, 0.9, 0.35)
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("4_luz")
+
+[node name="OrbeBosque" type="Sprite2D" parent="."]
+position = Vector2(-20, -18)
+scale = Vector2(0.6, 0.6)
+z_index = 1
+texture = ExtResource("5_bosque")
+
+[node name="OrbeDesierto" type="Sprite2D" parent="."]
+position = Vector2(20, -18)
+scale = Vector2(0.6, 0.6)
+z_index = 1
+texture = ExtResource("6_desierto")
+
+[node name="OrbeNieve" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+scale = Vector2(0.6, 0.6)
+z_index = 1
+texture = ExtResource("7_nieve")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_jefe")
+autoplay = "default"
+
+[node name="ZonaContacto" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaContacto"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_contacto")
+
+[node name="SpriteMuerte" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(3, 3)
+texture = ExtResource("3_muerto")
+
+[node name="TimerDano" type="Timer" parent="."]
+one_shot = true

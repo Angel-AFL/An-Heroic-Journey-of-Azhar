@@ -1,15 +1,15 @@
 extends Control
 
 ## Menú de inicio: permite comenzar una partida nueva (reinicia inventario,
-## monedero, mejoras y equipo) o salir del juego.
+## monedero, mejoras y equipo) pasando por la cinemática de introducción, o
+## salir del juego.
 
 const MonederoTipo = preload("res://scripts/monedero.gd")
 const MejorasTipo = preload("res://scripts/mejoras.gd")
 const InventarioTipo = preload("res://scripts/inventario.gd")
 const EquipoTipo = preload("res://scripts/equipo.gd")
 
-const ESCENA_INICIAL: String = "res://scenes/bosque/bosque.tscn"
-const PUNTO_ENTRADA: StringName = &"PuntosEntrada/DesdeMenu"
+const ESCENA_CINEMATICA: String = "res://scenes/ui/cinematica_intro.tscn"
 
 @onready var _boton_jugar: Button = %BotonJugar
 @onready var _boton_salir: Button = %BotonSalir
@@ -30,7 +30,7 @@ func _on_boton_jugar_pressed() -> void:
 	mejoras.reiniciar()
 	inventario.reiniciar()
 	equipo.reiniciar()
-	Transicion.cambiar_escena(ESCENA_INICIAL, PUNTO_ENTRADA)
+	Transicion.cambiar_escena(ESCENA_CINEMATICA)
 
 
 func _on_boton_salir_pressed() -> void:

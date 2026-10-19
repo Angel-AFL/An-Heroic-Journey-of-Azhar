@@ -143,7 +143,11 @@ func _puede_actuar() -> bool:
 
 
 func _ids_visibles() -> Array:
-	var ids := _inventario.items().keys()
+	var ids := []
+	for id in _inventario.items().keys():
+		if str(CatalogoItems.obtener(id).get("tipo", "material")) == "clave":
+			continue
+		ids.append(id)
 	if ids.size() > MAX_SLOTS:
 		ids = ids.slice(0, MAX_SLOTS)
 	return ids

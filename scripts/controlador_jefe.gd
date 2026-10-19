@@ -43,5 +43,5 @@ func _aparecer_jefe() -> void:
 	if escena == null:
 		return
 	var jefe := escena_jefe.instantiate() as Node2D
-	escena.add_child(jefe)
-	jefe.global_position = global_position
+	jefe.position = global_position
+	escena.call_deferred("add_child", jefe)

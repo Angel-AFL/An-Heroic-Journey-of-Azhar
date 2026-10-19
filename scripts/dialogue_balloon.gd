@@ -37,6 +37,8 @@ const RETRATOS := {
 	"Pablo": preload("res://sprites/Personajes/NPC/Villager3/Faceset.png"),
 	"Maritza": preload("res://sprites/Personajes/NPC/Villager4/Faceset.png"),
 	"Gonzalo": preload("res://sprites/Personajes/NPC/Inspector/Faceset.png"),
+	"Puerta Ancestral": preload("res://sprites/UI/Retratos/PuertaAncestral.svg"),
+	"Guardián del Eclipse": preload("res://sprites/UI/Retratos/GuardianEclipse.svg"),
 }
 const RETRATO_POR_DEFECTO: Texture2D = preload("res://sprites/Personajes/NPC/Comerciante/Faceset.png")
 

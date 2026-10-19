@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://kmdxjbh31g6y"]
+
+[ext_resource type="Shader" path="res://shaders/vineta.gdshader" id="1_ig0i8"]
+
+[resource]
+shader = ExtResource("1_ig0i8")
+shader_parameter/fuerza = 0.6
+shader_parameter/inicio = 0.22
+shader_parameter/fin = 0.85

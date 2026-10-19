@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://y1umt6s3cqrc"
+path="res://.godot/imported/puerta_ancestral.dialogue-2c26be45e57215133f62271dfa47567d.tres"
+
+[deps]
+
+source_file="res://dialogues/puerta_ancestral.dialogue"
+dest_files=["res://.godot/imported/puerta_ancestral.dialogue-2c26be45e57215133f62271dfa47567d.tres"]
+
+[params]
+
+defaults=true
